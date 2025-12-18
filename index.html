@@ -94,9 +94,9 @@
             position: absolute;
             width: 48px;
             height: 48px;
-            border: 2px solid #36494E;
+            border: 1.5px solid #36494E;
             border-radius: 8px;
-            opacity: 0.8;
+            opacity: 0.5;
             transition: border-color 0.3s ease;
         }
         
@@ -108,6 +108,7 @@
             background-color: #A9CEF4;
             border-radius: 4px;
             transform: rotate(45deg);
+            box-shadow: 0 2px 8px rgba(169, 206, 244, 0.3);
         }
         
         .logo-text {
@@ -118,7 +119,12 @@
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to bottom, rgba(54, 73, 78, 0.7), rgba(54, 73, 78, 0.9));
+            background: linear-gradient(
+                135deg,
+                rgba(54, 73, 78, 0.2) 0%,
+                rgba(54, 73, 78, 0.4) 40%,
+                rgba(54, 73, 78, 0.8) 100%
+            );
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -213,13 +219,69 @@
         
         /* Service card styling */
         .service-card {
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border-top: 4px solid #A9CEF4;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: linear-gradient(135deg, #A9CEF4 0%, #7EA0B7 100%);
+            transition: height 0.4s ease;
+            z-index: 0;
+            opacity: 0.05;
+        }
+        
+        .service-card:hover::before {
+            height: 100%;
         }
         
         .service-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(126, 160, 183, 0.15);
+            box-shadow: 0 25px 50px rgba(126, 160, 183, 0.15);
+        }
+        
+        /* Premium card styling */
+        .premium-card {
+            position: relative;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+            border: 2px solid #A9CEF4;
+        }
+        
+        .premium-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #A9CEF4 0%, #7EA0B7 100%);
+            border-radius: 4px 4px 0 0;
+        }
+        
+        /* Feature image enhancement */
+        .feature-image-wrapper {
+            position: relative;
+            padding: 15px;
+        }
+        
+        .feature-image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid #A9CEF4;
+            border-radius: 12px;
+            z-index: -1;
+            opacity: 0.4;
         }
         
         /* Tagline styling */
@@ -227,6 +289,41 @@
             font-family: 'Oswald', sans-serif;
             letter-spacing: 0.05em;
             color: #36494E;
+        }
+        
+        /* Testimonial stars */
+        .testimonial-stars {
+            color: #A9CEF4;
+            opacity: 0.8;
+            font-size: 0.9em;
+        }
+        
+        /* Stats container */
+        .stats-container {
+            background: linear-gradient(135deg, #F8FAFC 0%, #FFFFFF 100%);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .stats-item {
+            position: relative;
+            padding: 1rem;
+        }
+        
+        .stats-item::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 60%;
+            background-color: rgba(126, 160, 183, 0.2);
+        }
+        
+        .stats-item:last-child::after {
+            display: none;
         }
     </style>
 </head>
@@ -256,7 +353,7 @@
                 <a href="#" class="hover:text-ledger-blue transition-colors duration-300">RATES</a>
                 <a href="#contact" class="hover:text-ledger-blue transition-colors duration-300">CONTACT</a>
                 <a href="#contact"
-                   class="bg-ledger-blue text-ledger-dark px-6 py-2 rounded-full hover:bg-opacity-90 transition-colors duration-300 font-medium">
+                   class="bg-ledger-blue text-ledger-dark px-6 py-2 rounded-full hover:bg-opacity-90 hover:shadow-lg transition-all duration-300 font-medium">
                     GET STARTED
                 </a>
             </div>
@@ -291,19 +388,19 @@
              alt="Modern financial advisory office with professionals" 
              class="w-full h-full object-cover">
         
-        <div class="image-overlay">
+        <div class="hero-overlay">
             <div class="max-w-4xl mx-auto px-4">
-                <h1 class="font-oswald text-5xl md:text-7xl lg:text-8xl text-white mb-6">
+                <h1 class="font-oswald text-5xl md:text-7xl lg:text-8xl text-white mb-10">
                     CLARITY.<br>COMPLIANCE.<br>CONFIDENCE.
                 </h1>
-                <p class="font-inter text-xl md:text-2xl text-white/80 mb-8 max-w-2xl mx-auto">
+                <p class="font-inter text-xl md:text-2xl text-white/80 mb-12 max-w-2xl mx-auto">
                     Modern tax advisory and business solutions guided by experts, powered by trust.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#contact" class="inline-block font-inter font-semibold bg-ledger-blue text-ledger-dark px-8 py-3 rounded-full hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 text-lg animate-float">
+                <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                    <a href="#contact" class="inline-block font-inter font-semibold bg-ledger-blue text-ledger-dark px-10 py-4 rounded-full hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 text-lg animate-float">
                         START YOUR JOURNEY →
                     </a>
-                    <a href="#services" class="inline-block font-inter font-semibold border-2 border-white text-white px-8 py-3 rounded-full hover:bg-white hover:text-ledger-dark transition-all duration-300 transform hover:scale-105 text-lg">
+                    <a href="#services" class="inline-block font-inter font-semibold border-2 border-white text-white px-10 py-4 rounded-full hover:bg-white hover:text-ledger-dark transition-all duration-300 transform hover:scale-105 text-lg">
                         LEARN MORE
                     </a>
                 </div>
@@ -325,69 +422,77 @@
     <section id="services" class="py-20 bg-light-bg">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-oswald font-bold text-ledger-dark mb-4">
+                <h2 class="text-3xl md:text-4xl font-oswald font-bold text-ledger-dark mb-6">
                     Comprehensive Advisory Services
                 </h2>
-                <p class="text-ledger-slate max-w-3xl mx-auto font-inter">
+                <p class="text-ledger-slate max-w-3xl mx-auto font-inter text-lg">
                     Expert-led guidance across tax, compliance, and business optimization. Every decision reviewed, explained, and intentional.
                 </p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Service 1 -->
-                <div class="service-card bg-white rounded-lg shadow-lg p-6 border-custom">
-                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-lg flex items-center justify-center mb-6">
-                        <i class="fas fa-file-invoice-dollar text-2xl text-ledger-dark"></i>
+                <div class="service-card bg-white rounded-xl shadow-lg p-8">
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 bg-ledger-blue/10 rounded-xl flex items-center justify-center mb-6">
+                            <i class="fas fa-file-invoice-dollar text-2xl text-ledger-dark"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-ledger-dark mb-4 font-oswald">Tax Advisory & Filing</h3>
+                        <p class="text-ledger-slate mb-6 font-inter text-lg leading-relaxed">
+                            Expert-led tax guidance and precision filing for individuals, freelancers, and businesses.
+                        </p>
+                        <a href="#" class="inline-flex items-center text-ledger-blue font-medium hover:text-ledger-dark transition-colors duration-300 font-inter">
+                            Learn More <i class="fas fa-arrow-right ml-3 transition-transform duration-300 group-hover:translate-x-2"></i>
+                        </a>
                     </div>
-                    <h3 class="text-xl font-bold text-ledger-dark mb-3 font-oswald">Tax Advisory & Filing</h3>
-                    <p class="text-ledger-slate mb-4 font-inter">
-                        Expert-led tax guidance and precision filing for individuals, freelancers, and businesses.
-                    </p>
-                    <a href="#" class="text-ledger-dark font-medium hover:text-ledger-blue transition duration-300 font-inter">
-                        Learn More <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
                 </div>
                 
                 <!-- Service 2 -->
-                <div class="service-card bg-white rounded-lg shadow-lg p-6 border-custom">
-                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-lg flex items-center justify-center mb-6">
-                        <i class="fas fa-chart-line text-2xl text-ledger-dark"></i>
+                <div class="service-card bg-white rounded-xl shadow-lg p-8">
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 bg-ledger-blue/10 rounded-xl flex items-center justify-center mb-6">
+                            <i class="fas fa-chart-line text-2xl text-ledger-dark"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-ledger-dark mb-4 font-oswald">Financial Strategy</h3>
+                        <p class="text-ledger-slate mb-6 font-inter text-lg leading-relaxed">
+                            Data-driven insights and strategic planning for sustainable business growth and optimization.
+                        </p>
+                        <a href="#" class="inline-flex items-center text-ledger-blue font-medium hover:text-ledger-dark transition-colors duration-300 font-inter">
+                            Learn More <i class="fas fa-arrow-right ml-3 transition-transform duration-300 group-hover:translate-x-2"></i>
+                        </a>
                     </div>
-                    <h3 class="text-xl font-bold text-ledger-dark mb-3 font-oswald">Financial Strategy</h3>
-                    <p class="text-ledger-slate mb-4 font-inter">
-                        Data-driven insights and strategic planning for sustainable business growth and optimization.
-                    </p>
-                    <a href="#" class="text-ledger-dark font-medium hover:text-ledger-blue transition duration-300 font-inter">
-                        Learn More <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
                 </div>
                 
                 <!-- Service 3 -->
-                <div class="service-card bg-white rounded-lg shadow-lg p-6 border-custom">
-                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-lg flex items-center justify-center mb-6">
-                        <i class="fas fa-user-shield text-2xl text-ledger-dark"></i>
+                <div class="service-card bg-white rounded-xl shadow-lg p-8">
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 bg-ledger-blue/10 rounded-xl flex items-center justify-center mb-6">
+                            <i class="fas fa-user-shield text-2xl text-ledger-dark"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-ledger-dark mb-4 font-oswald">Compliance & Security</h3>
+                        <p class="text-ledger-slate mb-6 font-inter text-lg leading-relaxed">
+                            Ensure regulatory compliance and implement robust security frameworks for peace of mind.
+                        </p>
+                        <a href="#" class="inline-flex items-center text-ledger-blue font-medium hover:text-ledger-dark transition-colors duration-300 font-inter">
+                            Learn More <i class="fas fa-arrow-right ml-3 transition-transform duration-300 group-hover:translate-x-2"></i>
+                        </a>
                     </div>
-                    <h3 class="text-xl font-bold text-ledger-dark mb-3 font-oswald">Compliance & Security</h3>
-                    <p class="text-ledger-slate mb-4 font-inter">
-                        Ensure regulatory compliance and implement robust security frameworks for peace of mind.
-                    </p>
-                    <a href="#" class="text-ledger-dark font-medium hover:text-ledger-blue transition duration-300 font-inter">
-                        Learn More <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
                 </div>
                 
                 <!-- Service 4 -->
-                <div class="service-card bg-white rounded-lg shadow-lg p-6 border-custom">
-                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-lg flex items-center justify-center mb-6">
-                        <i class="fas fa-building text-2xl text-ledger-dark"></i>
+                <div class="service-card bg-white rounded-xl shadow-lg p-8">
+                    <div class="relative z-10">
+                        <div class="w-14 h-14 bg-ledger-blue/10 rounded-xl flex items-center justify-center mb-6">
+                            <i class="fas fa-building text-2xl text-ledger-dark"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-ledger-dark mb-4 font-oswald">Business Optimization</h3>
+                        <p class="text-ledger-slate mb-6 font-inter text-lg leading-relaxed">
+                            Streamline operations and implement efficient processes for maximum productivity and growth.
+                        </p>
+                        <a href="#" class="inline-flex items-center text-ledger-blue font-medium hover:text-ledger-dark transition-colors duration-300 font-inter">
+                            Learn More <i class="fas fa-arrow-right ml-3 transition-transform duration-300 group-hover:translate-x-2"></i>
+                        </a>
                     </div>
-                    <h3 class="text-xl font-bold text-ledger-dark mb-3 font-oswald">Business Optimization</h3>
-                    <p class="text-ledger-slate mb-4 font-inter">
-                        Streamline operations and implement efficient processes for maximum productivity and growth.
-                    </p>
-                    <a href="#" class="text-ledger-dark font-medium hover:text-ledger-blue transition duration-300 font-inter">
-                        Learn More <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
                 </div>
             </div>
         </div>
@@ -398,106 +503,113 @@
         <div class="max-w-7xl mx-auto px-4">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div class="animate-slideInLeft">
-                    <h2 class="text-3xl md:text-4xl font-oswald font-bold text-ledger-dark mb-6">
+                    <h2 class="text-3xl md:text-4xl font-oswald font-bold text-ledger-dark mb-8">
                         Why Choose LedgerTrust
                     </h2>
-                    <ul class="space-y-4">
+                    <ul class="space-y-6">
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-ledger-blue text-xl mr-3 mt-1"></i>
-                            <span class="text-ledger-slate font-inter">Advisor-led guidance with human expertise</span>
+                            <i class="fas fa-check-circle text-ledger-blue text-xl mr-4 mt-1"></i>
+                            <span class="text-ledger-slate font-inter text-lg">Advisor-led guidance with human expertise</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-ledger-blue text-xl mr-3 mt-1"></i>
-                            <span class="text-ledger-slate font-inter">Modern systems supporting traditional expertise</span>
+                            <i class="fas fa-check-circle text-ledger-blue text-xl mr-4 mt-1"></i>
+                            <span class="text-ledger-slate font-inter text-lg">Modern systems supporting traditional expertise</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-ledger-blue text-xl mr-3 mt-1"></i>
-                            <span class="text-ledger-slate font-inter">Transparent processes with no surprises</span>
+                            <i class="fas fa-check-circle text-ledger-blue text-xl mr-4 mt-1"></i>
+                            <span class="text-ledger-slate font-inter text-lg">Transparent processes with no surprises</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-ledger-blue text-xl mr-3 mt-1"></i>
-                            <span class="text-ledger-slate font-inter">Strategic guidance beyond seasonal filing</span>
+                            <i class="fas fa-check-circle text-ledger-blue text-xl mr-4 mt-1"></i>
+                            <span class="text-ledger-slate font-inter text-lg">Strategic guidance beyond seasonal filing</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-ledger-blue text-xl mr-3 mt-1"></i>
-                            <span class="text-ledger-slate font-inter">Risk-aware approach for complex finances</span>
+                            <i class="fas fa-check-circle text-ledger-blue text-xl mr-4 mt-1"></i>
+                            <span class="text-ledger-slate font-inter text-lg">Risk-aware approach for complex finances</span>
                         </li>
                     </ul>
                 </div>
-                <div class="animate-slideInRight">
-                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Financial advisors collaborating" class="rounded-lg shadow-lg w-full">
+                <div class="animate-slideInRight ">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Financial advisors collaborating" class="rounded-xl shadow-lg w-full">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Appointment Scheduling Section -->
-<section id="appointment" class="py-24 px-4 md:px-12 bg-ledger-dark">
-    <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-            <div class="mb-8">
-                <span class="inline-block font-inter font-bold text-ledger-blue bg-white/10 px-4 py-1 rounded-full">SCHEDULE A CONSULTATION</span>
-            </div>
-            <h2 class="font-oswald text-4xl md:text-5xl text-white mb-6">
-                Book Your Consultation
-            </h2>
-            <p class="font-inter text-xl text-ledger-blue/80 max-w-3xl mx-auto">
-                Choose your preferred consultation type and schedule a time that works for you.
-            </p>
-        </div>
-        
-        <div class="grid md:grid-cols-3 gap-8">
-            <!-- Phone Consultation -->
-            <div class="contact-card p-8 text-center bg-white rounded-xl shadow-lg">
-                <div class="w-16 h-16 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <i class="fas fa-phone text-2xl text-ledger-blue"></i>
+    <section id="appointment" class="py-24 px-4 md:px-12 bg-ledger-dark">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <div class="mb-8">
+                    <span class="inline-block font-inter font-bold text-ledger-blue bg-white/10 px-4 py-1 rounded-full">SCHEDULE A CONSULTATION</span>
                 </div>
-                <h3 class="font-oswald text-xl text-ledger-dark mb-4">Phone Consultation</h3>
-                <p class="font-inter text-ledger-slate mb-6">
-                    30-minute introductory call to discuss your needs and how we can help.
+                <h2 class="font-oswald text-4xl md:text-5xl text-white mb-8">
+                    Book Your Consultation
+                </h2>
+                <p class="font-inter text-xl text-ledger-blue/80 max-w-3xl mx-auto">
+                    Choose your preferred consultation type and schedule a time that works for you.
                 </p>
-                <a href="https://calendly.com/ledgertrust/phone-consultation" 
-                   target="_blank"
-                   class="inline-block font-inter font-medium text-ledger-blue hover:text-ledger-steel transition-colors">
-                    <i class="fas fa-calendar-alt mr-2"></i> SCHEDULE PHONE CALL
-                </a>
             </div>
             
-            <!-- Video Consultation -->
-            <div class="contact-card p-8 text-center bg-white rounded-xl shadow-lg border-2 border-ledger-blue">
-                <div class="w-16 h-16 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <i class="fas fa-video text-2xl text-ledger-blue"></i>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Phone Consultation -->
+                <div class="contact-card p-8 text-center bg-white rounded-xl shadow-lg">
+                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-phone text-2xl text-ledger-blue"></i>
+                    </div>
+                    <h3 class="font-oswald text-xl text-ledger-dark mb-4">Phone Consultation</h3>
+                    <p class="font-inter text-ledger-slate mb-6">
+                        30-minute introductory call to discuss your needs and how we can help.
+                    </p>
+                    <a href="https://calendly.com/ledgertrust/phone-consultation" 
+                       target="_blank"
+                       class="inline-block font-inter font-medium text-ledger-dark hover:text-ledger-steel transition-colors">
+                        <i class="fas fa-calendar-alt mr-2"></i> SCHEDULE PHONE CALL
+                    </a>
                 </div>
-                <h3 class="font-oswald text-xl text-ledger-dark mb-4">Video Consultation</h3>
-                <p class="font-inter text-ledger-slate mb-6">
-                    45-minute video meeting for more detailed discussion and document review.
-                </p>
-                <a href="https://calendly.com/ledgertrust/video-consultation" 
-                   target="_blank"
-                   class="inline-block font-inter font-semibold bg-ledger-blue text-white px-6 py-2 rounded-full hover:bg-ledger-steel transition-all duration-300">
-                    <i class="fas fa-calendar-check mr-2"></i> SCHEDULE VIDEO CALL
-                </a>
-            </div>
-            
-            <!-- In-Person Meeting -->
-            <div class="contact-card p-8 text-center bg-white rounded-xl shadow-lg">
-                <div class="w-16 h-16 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <i class="fas fa-handshake text-2xl text-ledger-blue"></i>
+                
+                <!-- Video Consultation -->
+                <div class="premium-card p-8 text-center rounded-xl shadow-2xl relative">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                        <span class="bg-ledger-blue text-white text-xs font-bold px-4 py-1 rounded-full shadow-lg">
+                            RECOMMENDED
+                        </span>
+                    </div>
+                    
+                    <div class="w-20 h-20 bg-gradient-to-br from-ledger-blue to-ledger-steel rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                        <i class="fas fa-video text-2xl text-white"></i>
+                    </div>
+                    
+                    <h3 class="font-oswald text-2xl text-ledger-dark mb-4">Video Consultation</h3>
+                    <p class="font-inter text-ledger-slate mb-6 text-lg">
+                        45-minute video meeting for more detailed discussion and document review.
+                    </p>
+                    
+                    <a href="https://calendly.com/ledgertrust/video-consultation" 
+                       target="_blank"
+                       class="inline-block font-inter font-semibold bg-gradient-to-r from-ledger-blue to-ledger-steel text-white px-8 py-3 rounded-full hover:shadow-xl transition-all duration-300 hover:scale-105">
+                        <i class="fas fa-calendar-check mr-3"></i> SCHEDULE VIDEO CALL
+                    </a>
                 </div>
-                <h3 class="font-oswald text-xl text-ledger-dark mb-4">In-Person Meeting</h3>
-                <p class="font-inter text-ledger-slate mb-6">
-                    60-minute office visit for comprehensive review and strategy planning.
-                </p>
-                <a href="https://calendly.com/ledgertrust/in-person-consultation" 
-                   target="_blank"
-                   class="inline-block font-inter font-medium text-ledger-blue hover:text-ledger-steel transition-colors">
-                    <i class="fas fa-map-marker-alt mr-2"></i> SCHEDULE OFFICE VISIT
-                </a>
+                
+                <!-- In-Person Meeting -->
+                <div class="contact-card p-8 text-center bg-white rounded-xl shadow-lg">
+                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-handshake text-2xl text-ledger-blue"></i>
+                    </div>
+                    <h3 class="font-oswald text-xl text-ledger-dark mb-4">In-Person Meeting</h3>
+                    <p class="font-inter text-ledger-slate mb-6">
+                        60-minute office visit for comprehensive review and strategy planning.
+                    </p>
+                    <a href="https://calendly.com/ledgertrust/in-person-consultation" 
+                       target="_blank"
+                       class="inline-block font-inter font-medium text-ledger-dark hover:text-ledger-steel transition-colors">
+                        <i class="fas fa-map-marker-alt mr-2"></i> SCHEDULE OFFICE VISIT
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-</section>
-
+    </section>
 
     <!-- Testimonials Section -->
     <section class="py-24 px-4 md:px-12 bg-light-bg">
@@ -506,7 +618,7 @@
                 <div class="mb-8">
                     <span class="inline-block font-inter font-bold text-ledger-blue bg-white px-4 py-1 rounded-full">CLIENT TESTIMONIALS</span>
                 </div>
-                <h2 class="font-oswald text-4xl md:text-5xl text-ledger-dark mb-6">
+                <h2 class="font-oswald text-4xl md:text-5xl text-ledger-dark mb-8">
                     What Our Clients Say
                 </h2>
                 <p class="font-inter text-xl text-ledger-slate max-w-3xl mx-auto">
@@ -519,14 +631,14 @@
                 <!-- Testimonial 1 -->
                 <div class="bg-white rounded-2xl shadow-lg p-8 border-t-4 border-ledger-blue hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
                     <div class="mb-6">
-                        <div class="flex text-ledger-blue mb-4">
+                        <div class="flex testimonial-stars mb-4">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                         </div>
-                        <p class="font-inter text-ledger-slate text-lg italic">
+                        <p class="font-inter text-ledger-slate text-lg italic leading-relaxed">
                             "LedgerTrust transformed my complex freelance taxes from stressful to simple. Their advisor-led approach gave me confidence I was making the right decisions."
                         </p>
                     </div>
@@ -546,14 +658,14 @@
                 <!-- Testimonial 2 -->
                 <div class="bg-white rounded-2xl shadow-lg p-8 border-t-4 border-ledger-steel hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
                     <div class="mb-6">
-                        <div class="flex text-ledger-blue mb-4">
+                        <div class="flex testimonial-stars mb-4">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star-half-alt"></i>
                         </div>
-                        <p class="font-inter text-ledger-slate text-lg italic">
+                        <p class="font-inter text-ledger-slate text-lg italic leading-relaxed">
                             "The compliance framework they implemented saved us from potential regulatory issues. Their proactive approach gave us complete peace of mind."
                         </p>
                     </div>
@@ -573,14 +685,14 @@
                 <!-- Testimonial 3 -->
                 <div class="bg-white rounded-2xl shadow-lg p-8 border-t-4 border-ledger-slate hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
                     <div class="mb-6">
-                        <div class="flex text-ledger-blue mb-4">
+                        <div class="flex testimonial-stars mb-4">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                         </div>
-                        <p class="font-inter text-ledger-slate text-lg italic">
+                        <p class="font-inter text-ledger-slate text-lg italic leading-relaxed">
                             "As a startup, we needed financial clarity from day one. Their strategic guidance helped us optimize our operations and accelerate growth."
                         </p>
                     </div>
@@ -599,37 +711,38 @@
             </div>
             
             <!-- Stats Row -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16">
-                <div class="text-center">
-                    <div class="font-oswald text-4xl md:text-5xl font-bold text-ledger-dark mb-2">98%</div>
-                    <div class="font-inter text-ledger-slate">Client Satisfaction</div>
-                </div>
-                <div class="text-center">
-                    <div class="font-oswald text-4xl md:text-5xl font-bold text-ledger-dark mb-2">500+</div>
-                    <div class="font-inter text-ledger-slate">Advisory Engagements</div>
-                </div>
-                <div class="text-center">
-                    <div class="font-oswald text-4xl md:text-5xl font-bold text-ledger-dark mb-2">$2.5M+</div>
-                    <div class="font-inter text-ledger-slate">Client Savings Identified</div>
-                </div>
-                <div class="text-center">
-                    <div class="font-oswald text-4xl md:text-5xl font-bold text-ledger-dark mb-2">100%</div>
-                    <div class="font-inter text-ledger-slate">Compliance Rate</div>
+            <div class="stats-container">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="stats-item text-center">
+                        <div class="font-oswald text-4xl md:text-5xl font-bold text-ledger-dark mb-2">98%</div>
+                        <div class="font-inter text-ledger-slate">Client Satisfaction</div>
+                    </div>
+                    <div class="stats-item text-center">
+                        <div class="font-oswald text-4xl md:text-5xl font-bold text-ledger-dark mb-2">500+</div>
+                        <div class="font-inter text-ledger-slate">Advisory Engagements</div>
+                    </div>
+                    <div class="stats-item text-center">
+                        <div class="font-oswald text-4xl md:text-5xl font-bold text-ledger-dark mb-2">$2.5M+</div>
+                        <div class="font-inter text-ledger-slate">Client Savings Identified</div>
+                    </div>
+                    <div class="stats-item text-center">
+                        <div class="font-oswald text-4xl md:text-5xl font-bold text-ledger-dark mb-2">100%</div>
+                        <div class="font-inter text-ledger-slate">Compliance Rate</div>
+                    </div>
                 </div>
             </div>
             
             <!-- CTA Below Testimonials -->
             <div class="text-center mt-16">
-                <a href="#contact" class="inline-block font-inter font-semibold bg-ledger-blue text-ledger-dark px-8 py-4 rounded-full hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 text-lg">
-                    Start Your Journey <i class="fas fa-arrow-right ml-2"></i>
+                <a href="#contact" class="inline-block font-inter font-semibold bg-ledger-blue text-ledger-dark px-10 py-4 rounded-full hover:bg-opacity-90 hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-lg">
+                    Start Your Journey <i class="fas fa-arrow-right ml-3"></i>
                 </a>
-                <p class="font-inter text-ledger-slate mt-4">Join professionals who trust LedgerTrust with their financial decisions</p>
+                <p class="font-inter text-ledger-slate mt-6 text-lg">Join professionals who trust LedgerTrust with their financial decisions</p>
             </div>
         </div>
     </section>
 
-
-        <!-- Footer - Updated to match about.html style with Instagram -->
+    <!-- Footer -->
     <footer class="bg-ledger-dark py-12 px-4 md:px-12 text-white">
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
@@ -651,8 +764,8 @@
                 
                 <!-- Quick Links -->
                 <div>
-                    <h3 class="font-oswald text-lg md:text-xl text-white mb-4 md:mb-6">QUICK LINKS</h3>
-                    <div class="font-inter text-white/80 space-y-2 text-sm md:text-base">
+                    <h3 class="font-oswald text-lg md:text-xl text-white mb-6">QUICK LINKS</h3>
+                    <div class="font-inter text-white/80 space-y-3 text-base">
                         <a href="/" class="block hover:text-ledger-blue transition-colors">HOME</a>
                         <a href="/about" class="block hover:text-ledger-blue transition-colors">ABOUT US</a>
                         <a href="#services" class="block hover:text-ledger-blue transition-colors">SERVICES</a>
@@ -664,25 +777,25 @@
                 
                 <!-- Contact -->
                 <div>
-                    <h3 class="font-oswald text-lg md:text-xl text-white mb-4 md:mb-6">CONTACT</h3>
-                    <address class="font-inter not-italic text-white/80 space-y-2 text-sm md:text-base">
+                    <h3 class="font-oswald text-lg md:text-xl text-white mb-6">CONTACT</h3>
+                    <address class="font-inter not-italic text-white/80 space-y-3 text-base">
                         <p>123 Business Street, Suite 100<br>Boston, MA 02108</p>
                         <p class="pt-2">+1 (555) 123-4567</p>
                         <p>info@upscalebos.com</p>
                     </address>
                     
-                    <h3 class="font-oswald text-lg md:text-xl text-white mb-4 md:mb-6 mt-6 md:mt-8">SOCIALS</h3>
+                    <h3 class="font-oswald text-lg md:text-xl text-white mb-6 mt-8">SOCIALS</h3>
                     <div class="flex space-x-4">
-                        <a href="#" class="text-white/60 hover:text-ledger-blue transition-colors">
+                        <a href="#" class="text-white/60 hover:text-ledger-blue transition-colors text-xl">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
-                        <a href="#" class="text-white/60 hover:text-ledger-blue transition-colors">
+                        <a href="#" class="text-white/60 hover:text-ledger-blue transition-colors text-xl">
                             <i class="fab fa-twitter"></i>
                         </a>
-                        <a href="#" class="text-white/60 hover:text-ledger-blue transition-colors">
+                        <a href="#" class="text-white/60 hover:text-ledger-blue transition-colors text-xl">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="#" class="text-white/60 hover:text-ledger-blue transition-colors">
+                        <a href="#" class="text-white/60 hover:text-ledger-blue transition-colors text-xl">
                             <i class="fab fa-instagram"></i>
                         </a>
                     </div>
@@ -690,13 +803,13 @@
                 
                 <!-- Newsletter -->
                 <div>
-                    <h3 class="font-oswald text-lg md:text-xl text-white mb-4 md:mb-6">STAY UPDATED</h3>
-                    <p class="font-inter text-white/80 mb-4 text-sm md:text-base">
+                    <h3 class="font-oswald text-lg md:text-xl text-white mb-6">STAY UPDATED</h3>
+                    <p class="font-inter text-white/80 mb-6 text-base">
                         Subscribe to our newsletter for the latest insights on business optimization.
                     </p>
-                    <form class="space-y-2">
-                        <input type="email" placeholder="Your email" class="w-full px-3 md:px-4 py-2 rounded-full border border-white/20 bg-white/10 text-white placeholder-white/50 font-inter text-xs md:text-sm" aria-label="Email for newsletter">
-                        <button type="submit" class="w-full font-inter font-medium bg-ledger-blue text-white px-3 md:px-4 py-2 rounded-full hover:bg-opacity-90 transition-colors text-xs md:text-sm">
+                    <form class="space-y-3">
+                        <input type="email" placeholder="Your email" class="w-full px-4 py-3 rounded-full border border-white/20 bg-white/10 text-white placeholder-white/50 font-inter text-sm" aria-label="Email for newsletter">
+                        <button type="submit" class="w-full font-inter font-medium bg-ledger-blue text-white px-4 py-3 rounded-full hover:bg-opacity-90 transition-colors text-sm">
                             SUBSCRIBE
                         </button>
                     </form>
@@ -812,6 +925,63 @@
                 }
             }
         });
+        
+        // Service card hover enhancement
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', (e) => {
+                const icon = card.querySelector('i');
+                if (icon) {
+                    icon.style.transform = 'scale(1.1) rotate(5deg)';
+                    icon.style.transition = 'transform 0.3s ease';
+                }
+            });
+            
+            card.addEventListener('mouseleave', (e) => {
+                const icon = card.querySelector('i');
+                if (icon) {
+                    icon.style.transform = 'scale(1) rotate(0deg)';
+                }
+            });
+        });
+        
+        // Animate stats counting
+        function animateCounter(element, finalValue, duration = 2000) {
+            let startValue = 0;
+            const increment = finalValue / (duration / 16); // 60fps
+            
+            const timer = setInterval(() => {
+                startValue += increment;
+                if (startValue >= finalValue) {
+                    element.textContent = finalValue + (element.textContent.includes('%') ? '%' : '+');
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(startValue) + (element.textContent.includes('%') ? '%' : '+');
+                }
+            }, 16);
+        }
+        
+        // Initialize when stats are in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statsContainer = entry.target;
+                    const stats = statsContainer.querySelectorAll('.font-oswald');
+                    stats.forEach(stat => {
+                        const text = stat.textContent;
+                        const value = parseInt(text.replace(/[^0-9]/g, ''));
+                        if (!isNaN(value)) {
+                            stat.textContent = '0' + (text.includes('%') ? '%' : '+');
+                            setTimeout(() => animateCounter(stat, value), 300);
+                        }
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        // Observe stats container
+        const statsContainer = document.querySelector('.stats-container');
+        if (statsContainer) observer.observe(statsContainer);
         
         // Prevent horizontal scroll on mobile
         window.addEventListener('resize', () => {

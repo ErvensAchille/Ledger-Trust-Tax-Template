@@ -47,11 +47,33 @@
                     },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
+                        'slideInLeft': 'slideInLeft 1s ease forwards',
+                        'slideInRight': 'slideInRight 1s ease forwards',
                     },
                     keyframes: {
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
                             '50%': { transform: 'translateY(-10px)' },
+                        },
+                        slideInLeft: {
+                            'from': {
+                                opacity: '0',
+                                transform: 'translateX(-100%)',
+                            },
+                            'to': {
+                                opacity: '1',
+                                transform: 'translateX(0)',
+                            }
+                        },
+                        slideInRight: {
+                            'from': {
+                                opacity: '0',
+                                transform: 'translateX(100%)',
+                            },
+                            'to': {
+                                opacity: '1',
+                                transform: 'translateX(0)',
+                            }
                         }
                     }
                 }
@@ -75,7 +97,7 @@
             outline-offset: 2px;
         }
         
-        /* Logo styling */
+        /* Logo styling - UPDATED to match home page */
         .logo-mark {
             position: relative;
             display: inline-flex;
@@ -88,9 +110,9 @@
             position: absolute;
             width: 48px;
             height: 48px;
-            border: 2px solid #36494E;
+            border: 1.5px solid #36494E;
             border-radius: 8px;
-            opacity: 0.8;
+            opacity: 0.5;
             transition: border-color 0.3s ease;
         }
         
@@ -102,17 +124,23 @@
             background-color: #A9CEF4;
             border-radius: 4px;
             transform: rotate(45deg);
+            box-shadow: 0 2px 8px rgba(169, 206, 244, 0.3);
         }
         
         .logo-text {
             color: currentColor;
         }
         
-        /* Hero section styling */
+        /* Hero section styling - UPDATED to match home page gradient */
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to bottom, rgba(54, 73, 78, 0.7), rgba(54, 73, 78, 0.9));
+            background: linear-gradient(
+                135deg,
+                rgba(54, 73, 78, 0.2) 0%,
+                rgba(54, 73, 78, 0.4) 40%,
+                rgba(54, 73, 78, 0.8) 100%
+            );
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -172,27 +200,71 @@
             object-position: center;
         }
         
-        .image-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, rgba(54, 73, 78, 0.4), rgba(54, 73, 78, 0.8));
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 2rem;
+        /* Service card styling - ENHANCED to match home page */
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-top: 4px solid #A9CEF4;
+            position: relative;
+            overflow: hidden;
         }
         
-        /* Service card styling */
-        .service-card {
-            transition: all 0.3s ease;
-            border-top: 4px solid #A9CEF4;
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: linear-gradient(135deg, #A9CEF4 0%, #7EA0B7 100%);
+            transition: height 0.4s ease;
+            z-index: 0;
+            opacity: 0.05;
+        }
+        
+        .service-card:hover::before {
+            height: 100%;
         }
         
         .service-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(126, 160, 183, 0.15);
+            box-shadow: 0 25px 50px rgba(126, 160, 183, 0.15);
+        }
+        
+        /* Premium card styling - ADDED from home page */
+        .premium-card {
+            position: relative;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+            border: 2px solid #A9CEF4;
+        }
+        
+        .premium-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #A9CEF4 0%, #7EA0B7 100%);
+            border-radius: 4px 4px 0 0;
+        }
+        
+        /* Feature image enhancement - ADDED from home page */
+        .feature-image-wrapper {
+            position: relative;
+            padding: 15px;
+        }
+        
+        .feature-image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid #A9CEF4;
+            border-radius: 12px;
+            z-index: -1;
+            opacity: 0.4;
         }
         
         /* Tagline styling */
@@ -202,7 +274,7 @@
             color: #36494E;
         }
         
-        /* Service icon styling */
+        /* Service icon styling - ENHANCED */
         .service-icon {
             width: 60px;
             height: 60px;
@@ -212,21 +284,82 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
         }
         
-        /* Feature card styling */
+        /* Feature card styling - ENHANCED to match home page service cards */
         .feature-card {
             background: white;
             border-radius: 12px;
             padding: 2rem;
-            border: 1px solid #E2E8F0;
-            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-top: 4px solid #A9CEF4;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: linear-gradient(135deg, #A9CEF4 0%, #7EA0B7 100%);
+            transition: height 0.4s ease;
+            z-index: 0;
+            opacity: 0.05;
+        }
+        
+        .feature-card:hover::before {
+            height: 100%;
         }
         
         .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(126, 160, 183, 0.15);
-            border-color: #A9CEF4;
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(126, 160, 183, 0.15);
+        }
+        
+        .feature-card .service-icon {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .feature-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        /* Stats container - ADDED from home page */
+        .stats-container {
+            background: linear-gradient(135deg, #F8FAFC 0%, #FFFFFF 100%);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .stats-item {
+            position: relative;
+            padding: 1rem;
+        }
+        
+        .stats-item::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 60%;
+            background-color: rgba(126, 160, 183, 0.2);
+        }
+        
+        .stats-item:last-child::after {
+            display: none;
+        }
+        
+        /* CTA section enhancement */
+        .cta-gradient {
+            background: linear-gradient(135deg, #A9CEF4 0%, #7EA0B7 100%);
         }
     </style>
 </head>
@@ -251,12 +384,12 @@
             <div class="hidden md:flex items-center space-x-8 font-inter font-medium">
                 <a href="/" class="hover:text-ledger-blue transition-colors duration-300">HOME</a>
                 <a href="/about" class="hover:text-ledger-blue transition-colors duration-300">ABOUT US</a>
-                <a href="/services" class="text-ledger-blue">SERVICES</a>
+                <a href="/services" class="text-ledger-blue font-medium">SERVICES</a>
                 <a href="#" class="hover:text-ledger-blue transition-colors duration-300">FILE MY TAXES</a>
                 <a href="#" class="hover:text-ledger-blue transition-colors duration-300">RATES</a>
                 <a href="/contact" class="hover:text-ledger-blue transition-colors duration-300">CONTACT</a>
                 <a href="/contact"
-                   class="bg-ledger-blue text-ledger-dark px-6 py-2 rounded-full hover:bg-opacity-90 transition-colors duration-300 font-medium">
+                   class="bg-ledger-blue text-ledger-dark px-6 py-2 rounded-full hover:bg-opacity-90 hover:shadow-lg transition-all duration-300 font-medium">
                     GET STARTED
                 </a>
             </div>
@@ -274,7 +407,7 @@
             <div class="flex flex-col space-y-4">
                 <a href="/" class="font-inter font-medium py-2 hover:text-ledger-blue transition-colors">HOME</a>
                 <a href="/about" class="font-inter font-medium py-2 hover:text-ledger-blue transition-colors">ABOUT US</a>
-                <a href="/services" class="font-inter font-medium py-2 text-ledger-blue">SERVICES</a>
+                <a href="/services" class="font-inter font-medium py-2 text-ledger-blue font-medium">SERVICES</a>
                 <a href="#" class="font-inter font-medium py-2 hover:text-ledger-blue transition-colors">FILE MY TAXES</a>
                 <a href="#" class="font-inter font-medium py-2 hover:text-ledger-blue transition-colors">RATES</a>
                 <a href="/contact" class="font-inter font-medium py-2 hover:text-ledger-blue transition-colors">CONTACT</a>
@@ -285,29 +418,29 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section - ENHANCED with home page gradient and spacing -->
     <section class="full-viewport relative">
         <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1911&q=80" 
              alt="Tax documents and calculator on desk" 
              class="w-full h-full object-cover">
         
-        <div class="image-overlay">
+        <div class="hero-overlay">
             <div class="max-w-5xl mx-auto px-4">
-                <h1 class="font-oswald text-5xl md:text-7xl lg:text-8xl text-white mb-6 leading-tight">
+                <h1 class="font-oswald text-5xl md:text-7xl lg:text-8xl text-white mb-10 leading-tight">
                     OUR SERVICES
                 </h1>
-                <p class="font-inter text-xl md:text-2xl text-white/80 mb-4 max-w-3xl mx-auto">
+                <p class="font-inter text-xl md:text-2xl text-white/80 mb-8 max-w-3xl mx-auto">
                     Taxes Made Easy, Efiling & Peace of Mind Included!
                 </p>
-                <p class="font-inter text-lg md:text-xl text-white/80 mb-8 max-w-3xl mx-auto">
+                <p class="font-inter text-lg md:text-xl text-white/80 mb-12 max-w-3xl mx-auto">
                     Personal, Family, Students, Seniors, Investments, Rental Income (except Air B&B),<br>
                     Small Business, Subcontractors, GST Returns & More!
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#main-services" class="inline-block font-inter font-semibold bg-ledger-blue text-ledger-dark px-8 py-3 rounded-full hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 text-lg animate-float">
+                <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                    <a href="#main-services" class="inline-block font-inter font-semibold bg-ledger-blue text-ledger-dark px-10 py-4 rounded-full hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 text-lg animate-float">
                         EXPLORE SERVICES →
                     </a>
-                    <a href="/contact" class="inline-block font-inter font-semibold border-2 border-white text-white px-8 py-3 rounded-full hover:bg-white hover:text-ledger-dark transition-all duration-300 transform hover:scale-105 text-lg">
+                    <a href="/contact" class="inline-block font-inter font-semibold border-2 border-white text-white px-10 py-4 rounded-full hover:bg-white hover:text-ledger-dark transition-all duration-300 transform hover:scale-105 text-lg">
                         GET STARTED
                     </a>
                 </div>
@@ -325,14 +458,14 @@
         </div>
     </section>
 
-    <!-- Main Services Section -->
+    <!-- Main Services Section - ENHANCED with premium styling -->
     <section id="main-services" class="py-24 px-4 md:px-12 bg-light-bg">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
                 <div class="mb-8">
                     <span class="inline-block font-inter font-bold text-ledger-blue bg-white px-4 py-1 rounded-full">COMPREHENSIVE TAX SOLUTIONS</span>
                 </div>
-                <h2 class="font-oswald text-4xl md:text-5xl text-ledger-dark mb-6">
+                <h2 class="font-oswald text-4xl md:text-5xl text-ledger-dark mb-8">
                     Expert Tax Preparation Services
                 </h2>
                 <p class="font-inter text-xl text-ledger-slate max-w-3xl mx-auto">
@@ -346,65 +479,74 @@
                     <div class="service-icon">
                         <i class="fas fa-user text-2xl text-white"></i>
                     </div>
-                    <h3 class="font-oswald text-2xl text-ledger-dark mb-4">Individual Tax Preparation</h3>
-                    <p class="font-inter text-ledger-slate mb-4">
-                        From simple to complex, we've got you covered. Whether you're a homeowner, have 1099s, student credits, qualify for the Earned Income Credit (EIC), or claim dependents, we make sure your return is filed right.
-                    </p>
-                    <ul class="space-y-2 mb-6">
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-ledger-blue text-sm mr-2 mt-1"></i>
-                            <span class="font-inter text-ledger-slate text-sm">Homeowners & rental income</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-ledger-blue text-sm mr-2 mt-1"></i>
-                            <span class="font-inter text-ledger-slate text-sm">1099s & student credits</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-ledger-blue text-sm mr-2 mt-1"></i>
-                            <span class="font-inter text-ledger-slate text-sm">Earned Income Credit (EIC)</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-ledger-blue text-sm mr-2 mt-1"></i>
-                            <span class="font-inter text-ledger-slate text-sm">Prior year filings & amendments</span>
-                        </li>
-                    </ul>
-                    <a href="/contact" class="inline-block font-inter font-medium text-ledger-blue hover:text-ledger-dark transition-colors">
-                        Get Started <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
+                    <div class="relative z-10">
+                        <h3 class="font-oswald text-2xl text-ledger-dark mb-4">Individual Tax Preparation</h3>
+                        <p class="font-inter text-ledger-slate mb-6 leading-relaxed">
+                            From simple to complex, we've got you covered. Whether you're a homeowner, have 1099s, student credits, qualify for the Earned Income Credit (EIC), or claim dependents, we make sure your return is filed right.
+                        </p>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-ledger-blue text-sm mr-3 mt-1"></i>
+                                <span class="font-inter text-ledger-slate text-sm md:text-base">Homeowners & rental income</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-ledger-blue text-sm mr-3 mt-1"></i>
+                                <span class="font-inter text-ledger-slate text-sm md:text-base">1099s & student credits</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-ledger-blue text-sm mr-3 mt-1"></i>
+                                <span class="font-inter text-ledger-slate text-sm md:text-base">Earned Income Credit (EIC)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-ledger-blue text-sm mr-3 mt-1"></i>
+                                <span class="font-inter text-ledger-slate text-sm md:text-base">Prior year filings & amendments</span>
+                            </li>
+                        </ul>
+                        <a href="/contact" class="inline-flex items-center text-ledger-blue font-medium hover:text-ledger-dark transition-colors duration-300 font-inter">
+                            Get Started <i class="fas fa-arrow-right ml-3 transition-transform duration-300 group-hover:translate-x-2"></i>
+                        </a>
+                    </div>
                 </div>
                 
-                <!-- Contractor Tax Preparation -->
-                <div class="feature-card">
-                    <div class="service-icon">
+                <!-- Contractor Tax Preparation - PREMIUM CARD -->
+                <div class="premium-card p-8 relative">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                        <span class="bg-ledger-blue text-white text-xs font-bold px-4 py-1 rounded-full shadow-lg">
+                            MOST POPULAR
+                        </span>
+                    </div>
+                    
+                    <div class="w-16 h-16 bg-gradient-to-br from-ledger-blue to-ledger-steel rounded-xl flex items-center justify-center mb-6">
                         <i class="fas fa-hard-hat text-2xl text-white"></i>
                     </div>
+                    
                     <h3 class="font-oswald text-2xl text-ledger-dark mb-4">Contractor Tax Preparation</h3>
-                    <p class="font-inter text-ledger-slate mb-4">
+                    <p class="font-inter text-ledger-slate mb-6 leading-relaxed">
                         For over 15 years, we've specialized in working with contractors. We understand the unique needs of your business compared to traditional companies.
                     </p>
-                    <p class="font-inter text-ledger-slate mb-4">
+                    <p class="font-inter text-ledger-slate mb-6 leading-relaxed">
                         Our team helps answer your questions, reduce audit risk, and minimize tax liability. We've worked directly with federal and state auditors to protect and save our clients thousands.
                     </p>
-                    <ul class="space-y-2 mb-6">
+                    <ul class="space-y-3 mb-8">
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-ledger-blue text-sm mr-2 mt-1"></i>
-                            <span class="font-inter text-ledger-slate text-sm">15+ years contractor expertise</span>
+                            <i class="fas fa-check-circle text-ledger-blue text-sm mr-3 mt-1"></i>
+                            <span class="font-inter text-ledger-slate text-sm md:text-base">15+ years contractor expertise</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-ledger-blue text-sm mr-2 mt-1"></i>
-                            <span class="font-inter text-ledger-slate text-sm">Audit risk reduction</span>
+                            <i class="fas fa-check-circle text-ledger-blue text-sm mr-3 mt-1"></i>
+                            <span class="font-inter text-ledger-slate text-sm md:text-base">Audit risk reduction</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-ledger-blue text-sm mr-2 mt-1"></i>
-                            <span class="font-inter text-ledger-slate text-sm">Tax liability minimization</span>
+                            <i class="fas fa-check-circle text-ledger-blue text-sm mr-3 mt-1"></i>
+                            <span class="font-inter text-ledger-slate text-sm md:text-base">Tax liability minimization</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-ledger-blue text-sm mr-2 mt-1"></i>
-                            <span class="font-inter text-ledger-slate text-sm">Federal & state audit support</span>
+                            <i class="fas fa-check-circle text-ledger-blue text-sm mr-3 mt-1"></i>
+                            <span class="font-inter text-ledger-slate text-sm md:text-base">Federal & state audit support</span>
                         </li>
                     </ul>
-                    <a href="/contact" class="inline-block font-inter font-medium text-ledger-blue hover:text-ledger-dark transition-colors">
-                        Learn More <i class="fas fa-arrow-right ml-2"></i>
+                    <a href="/contact" class="inline-block font-inter font-semibold bg-gradient-to-r from-ledger-blue to-ledger-steel text-white px-8 py-3 rounded-full hover:shadow-xl transition-all duration-300 hover:scale-105">
+                        <i class="fas fa-calendar-check mr-3"></i> SCHEDULE CONSULTATION
                     </a>
                 </div>
                 
@@ -413,114 +555,137 @@
                     <div class="service-icon">
                         <i class="fas fa-building text-2xl text-white"></i>
                     </div>
-                    <h3 class="font-oswald text-2xl text-ledger-dark mb-4">Business Tax Returns</h3>
-                    <p class="font-inter text-ledger-slate mb-4">
-                        From 1120, 1120s, and 1065 forms to sales and use tax, we provide complete filing services for your business.
-                    </p>
-                    <p class="font-inter text-ledger-slate mb-4">
-                        We help you prepare reports, W-2s, and 1099s, and ensure compliance at every step. Serving companies with fewer than 20 employees, we make business tax filing efficient and stress-free.
-                    </p>
-                    <ul class="space-y-2 mb-6">
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-ledger-blue text-sm mr-2 mt-1"></i>
-                            <span class="font-inter text-ledger-slate text-sm">1120, 1120s, 1065 forms</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-ledger-blue text-sm mr-2 mt-1"></i>
-                            <span class="font-inter text-ledger-slate text-sm">Sales & use tax filing</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-ledger-blue text-sm mr-2 mt-1"></i>
-                            <span class="font-inter text-ledger-slate text-sm">W-2 & 1099 preparation</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check-circle text-ledger-blue text-sm mr-2 mt-1"></i>
-                            <span class="font-inter text-ledger-slate text-sm">Companies under 20 employees</span>
-                        </li>
-                    </ul>
-                    <a href="/contact" class="inline-block font-inter font-medium text-ledger-blue hover:text-ledger-dark transition-colors">
-                        Business Solutions <i class="fas fa-arrow-right ml-2"></i>
-                    </a>
+                    <div class="relative z-10">
+                        <h3 class="font-oswald text-2xl text-ledger-dark mb-4">Business Tax Returns</h3>
+                        <p class="font-inter text-ledger-slate mb-6 leading-relaxed">
+                            From 1120, 1120s, and 1065 forms to sales and use tax, we provide complete filing services for your business.
+                        </p>
+                        <p class="font-inter text-ledger-slate mb-6 leading-relaxed">
+                            We help you prepare reports, W-2s, and 1099s, and ensure compliance at every step. Serving companies with fewer than 20 employees, we make business tax filing efficient and stress-free.
+                        </p>
+                        <ul class="space-y-3 mb-6">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-ledger-blue text-sm mr-3 mt-1"></i>
+                                <span class="font-inter text-ledger-slate text-sm md:text-base">1120, 1120s, 1065 forms</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-ledger-blue text-sm mr-3 mt-1"></i>
+                                <span class="font-inter text-ledger-slate text-sm md:text-base">Sales & use tax filing</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-ledger-blue text-sm mr-3 mt-1"></i>
+                                <span class="font-inter text-ledger-slate text-sm md:text-base">W-2 & 1099 preparation</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-ledger-blue text-sm mr-3 mt-1"></i>
+                                <span class="font-inter text-ledger-slate text-sm md:text-base">Companies under 20 employees</span>
+                            </li>
+                        </ul>
+                        <a href="/contact" class="inline-flex items-center text-ledger-blue font-medium hover:text-ledger-dark transition-colors duration-300 font-inter">
+                            Business Solutions <i class="fas fa-arrow-right ml-3 transition-transform duration-300 group-hover:translate-x-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stats Row - ADDED from home page -->
+            <div class="stats-container mt-16">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="stats-item text-center">
+                        <div class="font-oswald text-4xl md:text-5xl font-bold text-ledger-dark mb-2">15+</div>
+                        <div class="font-inter text-ledger-slate">Years Experience</div>
+                    </div>
+                    <div class="stats-item text-center">
+                        <div class="font-oswald text-4xl md:text-5xl font-bold text-ledger-dark mb-2">98%</div>
+                        <div class="font-inter text-ledger-slate">Client Satisfaction</div>
+                    </div>
+                    <div class="stats-item text-center">
+                        <div class="font-oswald text-4xl md:text-5xl font-bold text-ledger-dark mb-2">30</div>
+                        <div class="font-inter text-ledger-slate">Minute Average Turnaround</div>
+                    </div>
+                    <div class="stats-item text-center">
+                        <div class="font-oswald text-4xl md:text-5xl font-bold text-ledger-dark mb-2">100%</div>
+                        <div class="font-inter text-ledger-slate">Accuracy Guarantee</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Year Round Services Section -->
+    <!-- Year Round Services Section - ENHANCED with animations -->
     <section class="py-24 px-4 md:px-12 bg-white">
         <div class="max-w-6xl mx-auto">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div>
+                <div class="animate-slideInLeft">
                     <div class="mb-8">
                         <span class="inline-block font-inter font-bold text-ledger-blue bg-light-bg px-4 py-1 rounded-full">YEAR-ROUND SUPPORT</span>
                     </div>
-                    <h2 class="font-oswald text-4xl md:text-5xl text-ledger-dark mb-6">
+                    <h2 class="font-oswald text-4xl md:text-5xl text-ledger-dark mb-8">
                         Year Round Services
                     </h2>
-                    <p class="font-inter text-lg text-ledger-slate mb-6">
+                    <p class="font-inter text-xl text-ledger-slate mb-6 leading-relaxed">
                         Stay supported all year with help setting up QuickBooks, filing sales and use tax, and managing employee paperwork.
                     </p>
-                    <p class="font-inter text-lg text-ledger-slate mb-8">
+                    <p class="font-inter text-xl text-ledger-slate mb-8 leading-relaxed">
                         We're here to answer your questions, streamline your processes, and provide the ongoing guidance your business needs to stay compliant and organized.
                     </p>
-                    <div class="space-y-4">
-                        <div class="flex items-start">
-                            <div class="w-10 h-10 bg-ledger-blue/20 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fas fa-calculator text-ledger-blue"></i>
+                    <div class="space-y-6">
+                        <div class="flex items-start p-4 rounded-lg hover:bg-light-bg transition-colors duration-300">
+                            <div class="w-12 h-12 bg-ledger-blue/20 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-calculator text-xl text-ledger-blue"></i>
                             </div>
                             <div>
-                                <h4 class="font-oswald text-lg text-ledger-dark mb-1">QuickBooks Setup & Support</h4>
+                                <h4 class="font-oswald text-xl text-ledger-dark mb-2">QuickBooks Setup & Support</h4>
                                 <p class="font-inter text-ledger-slate">Proper setup and ongoing support for accurate financial tracking.</p>
                             </div>
                         </div>
-                        <div class="flex items-start">
-                            <div class="w-10 h-10 bg-ledger-blue/20 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fas fa-file-invoice-dollar text-ledger-blue"></i>
+                        <div class="flex items-start p-4 rounded-lg hover:bg-light-bg transition-colors duration-300">
+                            <div class="w-12 h-12 bg-ledger-blue/20 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-file-invoice-dollar text-xl text-ledger-blue"></i>
                             </div>
                             <div>
-                                <h4 class="font-oswald text-lg text-ledger-dark mb-1">Sales & Use Tax Filing</h4>
+                                <h4 class="font-oswald text-xl text-ledger-dark mb-2">Sales & Use Tax Filing</h4>
                                 <p class="font-inter text-ledger-slate">Timely and accurate filing to maintain compliance.</p>
                             </div>
                         </div>
-                        <div class="flex items-start">
-                            <div class="w-10 h-10 bg-ledger-blue/20 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fas fa-users text-ledger-blue"></i>
+                        <div class="flex items-start p-4 rounded-lg hover:bg-light-bg transition-colors duration-300">
+                            <div class="w-12 h-12 bg-ledger-blue/20 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-users text-xl text-ledger-blue"></i>
                             </div>
                             <div>
-                                <h4 class="font-oswald text-lg text-ledger-dark mb-1">Employee Paperwork Management</h4>
+                                <h4 class="font-oswald text-xl text-ledger-dark mb-2">Employee Paperwork Management</h4>
                                 <p class="font-inter text-ledger-slate">Complete handling of W-2s, 1099s, and other employee documents.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="relative rounded-2xl overflow-hidden shadow-2xl animate-fadeIn h-[70vh] max-h-[800px]">
+                <div class="animate-slideInRight">
                     <img src="https://images.unsplash.com/photo-1560264418-c4445382edbc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
                          alt="Business planning and organization" 
-                         class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-ledger-dark/20"></div>
+                         class="rounded-xl shadow-lg w-full h-full object-cover max-h-[500px]">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Benefits Section -->
+    <!-- Benefits Section - ENHANCED with hover effects -->
     <section class="py-24 px-4 md:px-12 bg-light-bg">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
                 <div class="mb-8">
                     <span class="inline-block font-inter font-bold text-ledger-blue bg-white px-4 py-1 rounded-full">OUR APPROACH</span>
                 </div>
-                <h2 class="font-oswald text-4xl md:text-5xl text-ledger-dark mb-6">
+                <h2 class="font-oswald text-4xl md:text-5xl text-ledger-dark mb-8">
                     The LedgerTrust Advantage
                 </h2>
-                <p class="font-inter text-xl text-ledger-slate max-w-3xl mx-auto">
+                <p class="font-inter text-xl text-ledger-slate max-w-3xl mx-auto leading-relaxed">
                     Why thousands of individuals and businesses trust us with their tax preparation needs.
                 </p>
             </div>
             
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Effective -->
-                <div class="bg-white rounded-xl p-8 text-center border border-gray-100">
+                <div class="service-card bg-white rounded-xl p-8 text-center">
                     <div class="w-16 h-16 bg-gradient-to-br from-ledger-blue to-ledger-steel rounded-full flex items-center justify-center mx-auto mb-6">
                         <i class="fas fa-chart-line text-2xl text-white"></i>
                     </div>
@@ -531,7 +696,7 @@
                 </div>
                 
                 <!-- Intuitive -->
-                <div class="bg-white rounded-xl p-8 text-center border border-gray-100">
+                <div class="service-card bg-white rounded-xl p-8 text-center">
                     <div class="w-16 h-16 bg-gradient-to-br from-ledger-steel to-ledger-slate rounded-full flex items-center justify-center mx-auto mb-6">
                         <i class="fas fa-comments text-2xl text-white"></i>
                     </div>
@@ -542,7 +707,7 @@
                 </div>
                 
                 <!-- Affordable -->
-                <div class="bg-white rounded-xl p-8 text-center border border-gray-100">
+                <div class="service-card bg-white rounded-xl p-8 text-center">
                     <div class="w-16 h-16 bg-gradient-to-br from-ledger-slate to-ledger-dark rounded-full flex items-center justify-center mx-auto mb-6">
                         <i class="fas fa-tag text-2xl text-white"></i>
                     </div>
@@ -553,7 +718,7 @@
                 </div>
                 
                 <!-- Efficient -->
-                <div class="bg-white rounded-xl p-8 text-center border border-gray-100">
+                <div class="service-card bg-white rounded-xl p-8 text-center">
                     <div class="w-16 h-16 bg-gradient-to-br from-ledger-dark to-ledger-blue rounded-full flex items-center justify-center mx-auto mb-6">
                         <i class="fas fa-bolt text-2xl text-white"></i>
                     </div>
@@ -566,90 +731,90 @@
         </div>
     </section>
 
-    <!-- Who We Serve Section -->
+    <!-- Who We Serve Section - ENHANCED with hover effects -->
     <section class="py-24 px-4 md:px-12 bg-white">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
                 <div class="mb-8">
                     <span class="inline-block font-inter font-bold text-ledger-blue bg-light-bg px-4 py-1 rounded-full">WHO WE SERVE</span>
                 </div>
-                <h2 class="font-oswald text-4xl md:text-5xl text-ledger-dark mb-6">
+                <h2 class="font-oswald text-4xl md:text-5xl text-ledger-dark mb-8">
                     Comprehensive Coverage For All
                 </h2>
-                <p class="font-inter text-xl text-ledger-slate max-w-3xl mx-auto">
+                <p class="font-inter text-xl text-ledger-slate max-w-3xl mx-auto leading-relaxed">
                     We provide expert tax services for individuals, families, and businesses across all stages of life and commerce.
                 </p>
             </div>
             
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="text-center p-4 rounded-lg hover:bg-light-bg transition-colors duration-300">
+                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-4 hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-user text-xl text-ledger-dark"></i>
                     </div>
                     <div class="font-inter font-medium text-ledger-dark">Individuals</div>
                 </div>
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="text-center p-4 rounded-lg hover:bg-light-bg transition-colors duration-300">
+                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-4 hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-users text-xl text-ledger-dark"></i>
                     </div>
                     <div class="font-inter font-medium text-ledger-dark">Families</div>
                 </div>
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="text-center p-4 rounded-lg hover:bg-light-bg transition-colors duration-300">
+                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-4 hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-graduation-cap text-xl text-ledger-dark"></i>
                     </div>
                     <div class="font-inter font-medium text-ledger-dark">Students</div>
                 </div>
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="text-center p-4 rounded-lg hover:bg-light-bg transition-colors duration-300">
+                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-4 hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-wheelchair text-xl text-ledger-dark"></i>
                     </div>
                     <div class="font-inter font-medium text-ledger-dark">Seniors</div>
                 </div>
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="text-center p-4 rounded-lg hover:bg-light-bg transition-colors duration-300">
+                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-4 hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-chart-pie text-xl text-ledger-dark"></i>
                     </div>
                     <div class="font-inter font-medium text-ledger-dark">Investments</div>
                 </div>
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="text-center p-4 rounded-lg hover:bg-light-bg transition-colors duration-300">
+                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-4 hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-home text-xl text-ledger-dark"></i>
                     </div>
                     <div class="font-inter font-medium text-ledger-dark">Rental Income</div>
                 </div>
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="text-center p-4 rounded-lg hover:bg-light-bg transition-colors duration-300">
+                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-4 hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-briefcase text-xl text-ledger-dark"></i>
                     </div>
                     <div class="font-inter font-medium text-ledger-dark">Small Business</div>
                 </div>
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="text-center p-4 rounded-lg hover:bg-light-bg transition-colors duration-300">
+                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-4 hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-tools text-xl text-ledger-dark"></i>
                     </div>
                     <div class="font-inter font-medium text-ledger-dark">Subcontractors</div>
                 </div>
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="text-center p-4 rounded-lg hover:bg-light-bg transition-colors duration-300">
+                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-4 hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-file-invoice text-xl text-ledger-dark"></i>
                     </div>
                     <div class="font-inter font-medium text-ledger-dark">GST Returns</div>
                 </div>
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="text-center p-4 rounded-lg hover:bg-light-bg transition-colors duration-300">
+                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-4 hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-landmark text-xl text-ledger-dark"></i>
                     </div>
                     <div class="font-inter font-medium text-ledger-dark">Sales Tax</div>
                 </div>
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="text-center p-4 rounded-lg hover:bg-light-bg transition-colors duration-300">
+                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-4 hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-hand-holding-usd text-xl text-ledger-dark"></i>
                     </div>
                     <div class="font-inter font-medium text-ledger-dark">Use Tax</div>
                 </div>
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="text-center p-4 rounded-lg hover:bg-light-bg transition-colors duration-300">
+                    <div class="w-16 h-16 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-4 hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-plus text-xl text-ledger-dark"></i>
                     </div>
                     <div class="font-inter font-medium text-ledger-dark">And More!</div>
@@ -658,27 +823,27 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="py-24 px-4 md:px-12 bg-gradient-to-r from-ledger-blue to-ledger-steel">
+    <!-- CTA Section - ENHANCED with premium styling -->
+    <section class="py-24 px-4 md:px-12 cta-gradient">
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="font-oswald text-4xl md:text-5xl text-ledger-dark mb-6">
+            <h2 class="font-oswald text-4xl md:text-5xl text-ledger-dark mb-8">
                 Ready for Stress-Free Tax Preparation?
             </h2>
-            <p class="font-inter text-xl text-ledger-dark/90 mb-10 max-w-3xl mx-auto">
+            <p class="font-inter text-xl text-ledger-dark/90 mb-12 max-w-3xl mx-auto leading-relaxed">
                 Experience the LedgerTrust difference. Professional, accurate, and affordable tax services with peace of mind included.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="/contact" class="inline-block font-inter font-semibold bg-white text-ledger-dark px-8 py-3 rounded-full hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 text-lg">
+            <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                <a href="/contact" class="inline-block font-inter font-semibold bg-white text-ledger-dark px-10 py-4 rounded-full hover:bg-opacity-90 hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-lg">
                     SCHEDULE CONSULTATION →
                 </a>
-                <a href="tel:+15551234567" class="inline-block font-inter font-semibold border-2 border-white text-white px-8 py-3 rounded-full hover:bg-white hover:text-ledger-dark transition-all duration-300 transform hover:scale-105 text-lg">
-                    <i class="fas fa-phone mr-2"></i> CALL NOW
+                <a href="tel:+15551234567" class="inline-block font-inter font-semibold border-2 border-white text-white px-10 py-4 rounded-full hover:bg-white hover:text-ledger-dark transition-all duration-300 transform hover:scale-105 text-lg">
+                    <i class="fas fa-phone mr-3"></i> CALL NOW
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Footer - UPDATED with consistent styling -->
     <footer class="bg-ledger-dark py-12 px-4 md:px-12 text-white">
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
@@ -690,18 +855,18 @@
                         </div>
                         <div class="font-oswald text-xl font-bold text-white">LEDGERTRUST ADVISORY</div>
                     </div>
-                    <p class="font-inter text-white/80 mb-6 text-sm md:text-base">
+                    <p class="font-inter text-white/80 mb-6 text-base leading-relaxed">
                         Transforming businesses through innovative solutions, expert guidance, and sustainable growth strategies.
                     </p>
-                    <div class="text-xs md:text-sm font-inter text-white/60">
+                    <div class="text-sm font-inter text-white/60">
                         © 2023 LEDGERTRUST ADVISORY. ALL RIGHTS RESERVED.
                     </div>
                 </div>
                 
                 <!-- Quick Links -->
                 <div>
-                    <h3 class="font-oswald text-lg md:text-xl text-white mb-4 md:mb-6">QUICK LINKS</h3>
-                    <div class="font-inter text-white/80 space-y-2 text-sm md:text-base">
+                    <h3 class="font-oswald text-xl text-white mb-6">QUICK LINKS</h3>
+                    <div class="font-inter text-white/80 space-y-3 text-base">
                         <a href="/" class="block hover:text-ledger-blue transition-colors">HOME</a>
                         <a href="/about" class="block hover:text-ledger-blue transition-colors">ABOUT US</a>
                         <a href="/services" class="block text-ledger-blue font-medium">SERVICES</a>
@@ -713,25 +878,25 @@
                 
                 <!-- Contact -->
                 <div>
-                    <h3 class="font-oswald text-lg md:text-xl text-white mb-4 md:mb-6">CONTACT</h3>
-                    <address class="font-inter not-italic text-white/80 space-y-2 text-sm md:text-base">
+                    <h3 class="font-oswald text-xl text-white mb-6">CONTACT</h3>
+                    <address class="font-inter not-italic text-white/80 space-y-3 text-base">
                         <p>123 Business Street, Suite 100<br>Boston, MA 02108</p>
                         <p class="pt-2">+1 (555) 123-4567</p>
                         <p>info@upscalebos.com</p>
                     </address>
                     
-                    <h3 class="font-oswald text-lg md:text-xl text-white mb-4 md:mb-6 mt-6 md:mt-8">SOCIALS</h3>
+                    <h3 class="font-oswald text-xl text-white mb-6 mt-8">SOCIALS</h3>
                     <div class="flex space-x-4">
-                        <a href="#" class="text-white/60 hover:text-ledger-blue transition-colors">
+                        <a href="#" class="text-white/60 hover:text-ledger-blue transition-colors text-xl">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
-                        <a href="#" class="text-white/60 hover:text-ledger-blue transition-colors">
+                        <a href="#" class="text-white/60 hover:text-ledger-blue transition-colors text-xl">
                             <i class="fab fa-twitter"></i>
                         </a>
-                        <a href="#" class="text-white/60 hover:text-ledger-blue transition-colors">
+                        <a href="#" class="text-white/60 hover:text-ledger-blue transition-colors text-xl">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="#" class="text-white/60 hover:text-ledger-blue transition-colors">
+                        <a href="#" class="text-white/60 hover:text-ledger-blue transition-colors text-xl">
                             <i class="fab fa-instagram"></i>
                         </a>
                     </div>
@@ -739,13 +904,13 @@
                 
                 <!-- Newsletter -->
                 <div>
-                    <h3 class="font-oswald text-lg md:text-xl text-white mb-4 md:mb-6">STAY UPDATED</h3>
-                    <p class="font-inter text-white/80 mb-4 text-sm md:text-base">
+                    <h3 class="font-oswald text-xl text-white mb-6">STAY UPDATED</h3>
+                    <p class="font-inter text-white/80 mb-6 text-base leading-relaxed">
                         Subscribe to our newsletter for the latest insights on business optimization.
                     </p>
-                    <form class="space-y-2">
-                        <input type="email" placeholder="Your email" class="w-full px-3 md:px-4 py-2 rounded-full border border-white/20 bg-white/10 text-white placeholder-white/50 font-inter text-xs md:text-sm" aria-label="Email for newsletter">
-                        <button type="submit" class="w-full font-inter font-medium bg-ledger-blue text-white px-3 md:px-4 py-2 rounded-full hover:bg-opacity-90 transition-colors text-xs md:text-sm">
+                    <form class="space-y-3">
+                        <input type="email" placeholder="Your email" class="w-full px-4 py-3 rounded-full border border-white/20 bg-white/10 text-white placeholder-white/50 font-inter text-base" aria-label="Email for newsletter">
+                        <button type="submit" class="w-full font-inter font-medium bg-ledger-blue text-white px-4 py-3 rounded-full hover:bg-opacity-90 transition-colors text-base">
                             SUBSCRIBE
                         </button>
                     </form>
@@ -762,7 +927,7 @@
         </div>
     </footer>
 
-    <!-- JavaScript -->
+    <!-- JavaScript - ENHANCED with home page features -->
     <script>
         // Mobile menu toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -843,6 +1008,63 @@
                 }
             }
         });
+        
+        // Service card icon hover enhancement - FROM HOME PAGE
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', (e) => {
+                const icon = card.querySelector('.service-icon i');
+                if (icon) {
+                    icon.style.transform = 'scale(1.1) rotate(5deg)';
+                    icon.style.transition = 'transform 0.3s ease';
+                }
+            });
+            
+            card.addEventListener('mouseleave', (e) => {
+                const icon = card.querySelector('.service-icon i');
+                if (icon) {
+                    icon.style.transform = 'scale(1) rotate(0deg)';
+                }
+            });
+        });
+        
+        // Animate stats counting - FROM HOME PAGE
+        function animateCounter(element, finalValue, duration = 2000) {
+            let startValue = 0;
+            const increment = finalValue / (duration / 16); // 60fps
+            
+            const timer = setInterval(() => {
+                startValue += increment;
+                if (startValue >= finalValue) {
+                    element.textContent = finalValue + (element.textContent.includes('%') ? '%' : '+');
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(startValue) + (element.textContent.includes('%') ? '%' : '+');
+                }
+            }, 16);
+        }
+        
+        // Initialize when stats are in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statsContainer = entry.target;
+                    const stats = statsContainer.querySelectorAll('.font-oswald');
+                    stats.forEach(stat => {
+                        const text = stat.textContent;
+                        const value = parseInt(text.replace(/[^0-9]/g, ''));
+                        if (!isNaN(value)) {
+                            stat.textContent = '0' + (text.includes('%') ? '%' : '+');
+                            setTimeout(() => animateCounter(stat, value), 300);
+                        }
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        // Observe stats container
+        const statsContainer = document.querySelector('.stats-container');
+        if (statsContainer) observer.observe(statsContainer);
         
         // Prevent horizontal scroll on mobile
         window.addEventListener('resize', () => {
