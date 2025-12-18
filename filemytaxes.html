@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File My Taxes | LedgerTrust Advisory</title>
+    
+    <!-- SEO -->
+    <meta name="description" content="Simple, secure tax filing process. Submit online or in-person, work with a dedicated Tax Specialist, and get your maximum refund with confidence.">
+    <meta name="keywords" content="tax filing, online tax submission, tax specialist, tax preparation, efiling, tax returns">
+    
+    <!-- Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'ledger-blue': '#A9CEF4',
+                        'ledger-dark': '#36494E',
+                        'ledger-steel': '#7EA0B7',
+                        'ledger-slate': '#597081',
+                        'accent': '#A9CEF4',
+                        'primary': '#A9CEF4',
+                        'secondary': '#7EA0B7',
+                        'light-bg': '#F8FAFC',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'oswald': ['Oswald', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Focus styles */
+        *:focus {
+            outline: 3px solid #A9CEF4;
+            outline-offset: 2px;
+        }
+        
+        /* Logo styling */
+        .logo-mark {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-mark::before {
+            content: '';
+            position: absolute;
+            width: 48px;
+            height: 48px;
+            border: 2px solid #36494E;
+            border-radius: 8px;
+            opacity: 0.8;
+            transition: border-color 0.3s ease;
+        }
+        
+        .logo-mark::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background-color: #A9CEF4;
+            border-radius: 4px;
+            transform: rotate(45deg);
+        }
+        
+        .logo-text {
+            color: currentColor;
+        }
+        
+        /* Navigation transitions */
+        .nav-transition {
+            transition: all 0.3s ease;
+        }
+        
+        .nav-scrolled {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            color: #36494E !important;
+            backdrop-filter: blur(10px);
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #A9CEF4;
+            border-radius: 4px;
+        }
+        
+        /* Hero section */
+        .full-viewport {
+            min-height: 100vh;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .full-viewport img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+        
+        .image-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(54, 73, 78, 0.4), rgba(54, 73, 78, 0.8));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        /* Step cards */
+        .step-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid #A9CEF4;
+            background: white;
+            border-radius: 12px;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(126, 160, 183, 0.15);
+        }
+        
+        /* Form styling */
+        .form-input {
+            background: white;
+            border: 1px solid #E2E8F0;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            border-color: #A9CEF4;
+            box-shadow: 0 0 0 3px rgba(169, 206, 244, 0.2);
+        }
+        
+        /* Tagline styling */
+        .tagline {
+            letter-spacing: 0.5px;
+        }
+        
+        /* Info box styling */
+        .info-box {
+            background: linear-gradient(135deg, #F8FAFC 0%, #FFFFFF 100%);
+            border-left: 4px solid #A9CEF4;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body class="font-inter bg-white">
+    <!-- Navigation -->
+    <nav id="site-nav" class="fixed top-0 left-0 right-0 z-50 py-6 px-4 md:px-12 transition-all duration-300 bg-transparent text-white nav-transition border-b border-transparent">
+        <div class="max-w-7xl mx-auto flex justify-between items-center w-full">
+            <!-- Logo -->
+            <a href="/" class="flex items-center space-x-3">
+                <div class="logo-mark w-12 h-12 flex items-center justify-center">
+                    <span class="font-oswald text-2xl font-bold relative z-10 logo-text text-white">LT</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="font-oswald text-xl font-bold logo-text">LEDGERTRUST ADVISORY</div>
+                    <div class="text-xs text-ledger-blue font-inter font-medium transition-colors duration-300 tagline">
+                        ADVISOR-LED. CONFIDENCE-BACKED.
+                    </div>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-8 font-inter font-medium">
+                <a href="/" class="hover:text-ledger-blue transition-colors duration-300">HOME</a>
+                <a href="/about" class="hover:text-ledger-blue transition-colors duration-300">ABOUT US</a>
+                <a href="/services" class="hover:text-ledger-blue transition-colors duration-300">SERVICES</a>
+                <a href="/file-my-taxes" class="text-ledger-blue">FILE MY TAXES</a>
+                <a href="/rates" class="hover:text-ledger-blue transition-colors duration-300">RATES</a>
+                <a href="/contact" class="hover:text-ledger-blue transition-colors duration-300">CONTACT</a>
+                <a href="/contact"
+                   class="bg-ledger-blue text-ledger-dark px-6 py-2 rounded-full hover:bg-opacity-90 transition-colors duration-300 font-medium">
+                    GET STARTED
+                </a>
+            </div>
+
+            <!-- Mobile menu button -->
+            <button id="mobile-menu-button" class="md:hidden" aria-label="Toggle mobile menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="md:hidden hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-sm shadow-lg py-4 px-4 text-ledger-dark">
+            <div class="flex flex-col space-y-4">
+                <a href="/" class="font-inter font-medium py-2 hover:text-ledger-blue transition-colors">HOME</a>
+                <a href="/about" class="font-inter font-medium py-2 hover:text-ledger-blue transition-colors">ABOUT US</a>
+                <a href="/services" class="font-inter font-medium py-2 hover:text-ledger-blue transition-colors">SERVICES</a>
+                <a href="/file-my-taxes" class="font-inter font-medium py-2 text-ledger-blue">FILE MY TAXES</a>
+                <a href="/rates" class="font-inter font-medium py-2 hover:text-ledger-blue transition-colors">RATES</a>
+                <a href="/contact" class="font-inter font-medium py-2 hover:text-ledger-blue transition-colors">CONTACT</a>
+                <a href="/contact" class="font-inter font-medium text-ledger-dark bg-ledger-blue px-6 py-3 rounded-full text-center mt-2 hover:bg-opacity-90 transition-colors">
+                    GET STARTED
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="full-viewport relative">
+        <img src="https://images.unsplash.com/photo-1554224155-cfa08c2a758f?q=80&w=2026&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+             alt="Organized tax documents and calculator" 
+             class="w-full h-full object-cover">
+        
+        <div class="image-overlay">
+            <div class="max-w-5xl mx-auto px-4">
+                <h1 class="font-oswald text-5xl md:text-7xl lg:text-8xl text-white mb-6 leading-tight">
+                    FILE YOUR TAXES<br>WITH CONFIDENCE
+                </h1>
+                <p class="font-inter text-xl md:text-2xl text-white/80 mb-8 max-w-3xl mx-auto">
+                    Simple, secure, and stress-free tax filing with expert guidance every step of the way.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#booking" class="inline-block font-inter font-semibold bg-ledger-blue text-ledger-dark px-8 py-3 rounded-full hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 text-lg animate-float">
+                        GET STARTED NOW →
+                    </a>
+                    <a href="#process" class="inline-block font-inter font-semibold border-2 border-white text-white px-8 py-3 rounded-full hover:bg-white hover:text-ledger-dark transition-all duration-300 transform hover:scale-105 text-lg">
+                        HOW IT WORKS
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Scroll indicator -->
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+                <div class="flex flex-col items-center">
+                    <span class="font-inter text-sm text-white/60 mb-2">SCROLL</span>
+                    <div class="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center">
+                        <div class="w-1 h-3 bg-white/60 rounded-full mt-2 animate-bounce"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="process" class="py-24 px-4 md:px-12 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <div class="mb-8">
+                    <span class="inline-block font-inter font-bold text-ledger-blue bg-light-bg px-4 py-1 rounded-full">SIMPLE PROCESS</span>
+                </div>
+                <h2 class="font-oswald text-4xl md:text-5xl text-ledger-dark mb-6">
+                    How Does Our Tax Filing Work?
+                </h2>
+                <p class="font-inter text-xl text-ledger-slate max-w-3xl mx-auto">
+                    Three simple steps to get your taxes filed accurately and maximize your refund.
+                </p>
+            </div>
+            
+            <!-- Step 1 -->
+            <div class="grid lg:grid-cols-2 gap-16 items-stretch mb-20">
+                <div class="step-card p-8">
+                    <div class="mb-6">
+                        <div class="w-12 h-12 bg-ledger-blue rounded-full flex items-center justify-center mb-4">
+                            <span class="font-oswald text-2xl font-bold text-white">1</span>
+                        </div>
+                        <h3 class="font-oswald text-2xl text-ledger-dark mb-4">Submit Your Tax Filing Request Online or In Person</h3>
+                        <p class="font-inter text-ledger-slate">
+                            Getting started is simple. Use our secure, easy-to-navigate client portal to begin your return from the comfort of your home. You can upload documents, track your progress, and save your work anytime so you never lose a step. If you'd rather, just drop your paperwork at our office—we'll handle the rest.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="inline-block px-3 py-1 bg-ledger-blue/20 text-ledger-blue rounded-full text-sm font-inter">Secure Portal</span>
+                        <span class="inline-block px-3 py-1 bg-ledger-blue/20 text-ledger-blue rounded-full text-sm font-inter">Document Upload</span>
+                        <span class="inline-block px-3 py-1 bg-ledger-blue/20 text-ledger-blue rounded-full text-sm font-inter">Progress Tracking</span>
+                        <span class="inline-block px-3 py-1 bg-ledger-blue/20 text-ledger-blue rounded-full text-sm font-inter">In-Person Drop-off</span>
+                    </div>
+                </div>
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl h-full min-h-[400px]">
+                    <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                         alt="Secure online tax submission" 
+                         class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-ledger-dark/20"></div>
+                </div>
+            </div>
+            
+            <!-- Step 2 -->
+            <div class="grid lg:grid-cols-2 gap-16 items-stretch mb-20">
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl h-full min-h-[400px] order-2 lg:order-1">
+                    <img src="https://images.unsplash.com/photo-1551836026-d5c2e0c49b61?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                         alt="Tax specialist consultation" 
+                         class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-ledger-dark/20"></div>
+                </div>
+                <div class="step-card p-8 order-1 lg:order-2">
+                    <div class="mb-6">
+                        <div class="w-12 h-12 bg-ledger-blue rounded-full flex items-center justify-center mb-4">
+                            <span class="font-oswald text-2xl font-bold text-white">2</span>
+                        </div>
+                        <h3 class="font-oswald text-2xl text-ledger-dark mb-4">Work With a Dedicated Tax Specialist</h3>
+                        <p class="font-inter text-ledger-slate">
+                            After your request is received, you'll be matched with a qualified Tax Specialist who will take time to understand your situation and goals. We don't just enter numbers—we look at the bigger picture, making sure you're maximizing deductions, staying compliant, and planning smartly for the future. You'll have direct access to your specialist for questions, updates, and peace of mind throughout the process.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="inline-block px-3 py-1 bg-ledger-blue/20 text-ledger-blue rounded-full text-sm font-inter">Dedicated Specialist</span>
+                        <span class="inline-block px-3 py-1 bg-ledger-blue/20 text-ledger-blue rounded-full text-sm font-inter">Maximize Deductions</span>
+                        <span class="inline-block px-3 py-1 bg-ledger-blue/20 text-ledger-blue rounded-full text-sm font-inter">Compliance Assurance</span>
+                        <span class="inline-block px-3 py-1 bg-ledger-blue/20 text-ledger-blue rounded-full text-sm font-inter">Direct Access</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 3 -->
+            <div class="grid lg:grid-cols-2 gap-16 items-stretch">
+                <div class="step-card p-8">
+                    <div class="mb-6">
+                        <div class="w-12 h-12 bg-ledger-blue rounded-full flex items-center justify-center mb-4">
+                            <span class="font-oswald text-2xl font-bold text-white">3</span>
+                        </div>
+                        <h3 class="font-oswald text-2xl text-ledger-dark mb-4">Review, Finalize, and Receive Your Return</h3>
+                        <p class="font-inter text-ledger-slate">
+                            Once your return is complete, you'll receive a secure digital copy through our portal, or you can choose to pick it up in person. No printers, no messy paperwork—just a simple, streamlined process designed around your convenience. We'll also walk you through the results so you fully understand your return before it's filed.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="inline-block px-3 py-1 bg-ledger-blue/20 text-ledger-blue rounded-full text-sm font-inter">Secure Delivery</span>
+                        <span class="inline-block px-3 py-1 bg-ledger-blue/20 text-ledger-blue rounded-full text-sm font-inter">Digital or In-Person</span>
+                        <span class="inline-block px-3 py-1 bg-ledger-blue/20 text-ledger-blue rounded-full text-sm font-inter">Results Walkthrough</span>
+                        <span class="inline-block px-3 py-1 bg-ledger-blue/20 text-ledger-blue rounded-full text-sm font-inter">Streamlined Process</span>
+                    </div>
+                </div>
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl h-full min-h-[400px]">
+                    <img src="https://images.unsplash.com/photo-1579621970795-87facc2f976d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                         alt="Final tax review and submission" 
+                         class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-ledger-dark/20"></div>
+                </div>
+            </div>
+            
+            <!-- Info Box -->
+            <div class="info-box p-8 mt-16">
+                <div class="flex items-start">
+                    <div class="text-ledger-blue mr-4 text-2xl">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-oswald text-xl text-ledger-dark mb-2">Behind on Filing?</h4>
+                        <p class="font-inter text-ledger-slate">
+                            Whether you're missing one year or ten, we specialize in multi-year catch-ups. Our team will organize, prepare, and file everything efficiently so you can get back on track without the stress.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="py-24 px-4 md:px-12 bg-light-bg">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <div class="mb-8">
+                    <span class="inline-block font-inter font-bold text-ledger-blue bg-white px-4 py-1 rounded-full">GET STARTED</span>
+                </div>
+                <h2 class="font-oswald text-4xl md:text-5xl text-ledger-dark mb-6">
+                    Ready to File Your Taxes?
+                </h2>
+                <p class="font-inter text-xl text-ledger-slate max-w-3xl mx-auto">
+                    Choose your path below. We make tax filing simple and stress-free for both new and returning clients.
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Returning Clients -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 border-t-4 border-ledger-blue">
+                    <div class="text-center mb-8">
+                        <div class="w-20 h-20 bg-ledger-blue/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-user-check text-3xl text-ledger-blue"></i>
+                        </div>
+                        <h3 class="font-oswald text-2xl text-ledger-dark mb-4">Returning Clients</h3>
+                        <p class="font-inter text-ledger-slate mb-6">
+                            Welcome back! Schedule your tax preparation appointment directly with your Tax Specialist.
+                        </p>
+                        <a href="https://calendly.com/ledgertrust/returning-client" 
+                           target="_blank"
+                           class="inline-block font-inter font-semibold bg-ledger-blue text-white px-8 py-3 rounded-full hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 text-lg w-full">
+                            SCHEDULE ON CALENDLY →
+                        </a>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-ledger-blue text-lg mr-3 mt-1"></i>
+                            <span class="font-inter text-ledger-slate">Direct access to your dedicated specialist</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-ledger-blue text-lg mr-3 mt-1"></i>
+                            <span class="font-inter text-ledger-slate">View real-time availability</span>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-ledger-blue text-lg mr-3 mt-1"></i>
+                            <span class="font-inter text-ledger-slate">Secure appointment confirmation</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- New Clients -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 border-t-4 border-ledger-steel">
+                    <div class="text-center mb-8">
+                        <div class="w-20 h-20 bg-ledger-steel/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-user-plus text-3xl text-ledger-steel"></i>
+                        </div>
+                        <h3 class="font-oswald text-2xl text-ledger-dark mb-4">New Clients</h3>
+                        <p class="font-inter text-ledger-slate mb-6">
+                            Start by completing our secure intake form. We'll match you with the perfect specialist.
+                        </p>
+                    </div>
+                    
+                    <!-- New Client Form -->
+                    <form id="new-client-form" class="space-y-6">
+                        <!-- Personal Information -->
+                        <div>
+                            <h4 class="font-oswald text-lg text-ledger-dark mb-4">Personal Information</h4>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="font-inter font-medium text-ledger-slate block mb-2">Full Name *</label>
+                                    <input type="text" name="full_name" class="form-input w-full" required>
+                                </div>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="font-inter font-medium text-ledger-slate block mb-2">Date of Birth *</label>
+                                        <input type="date" name="dob" class="form-input w-full" required>
+                                    </div>
+                                    <div>
+                                        <label class="font-inter font-medium text-ledger-slate block mb-2">Marital Status *</label>
+                                        <select name="marital_status" class="form-input w-full" required>
+                                            <option value="">Select</option>
+                                            <option value="single">Single</option>
+                                            <option value="married">Married</option>
+                                            <option value="divorced">Divorced</option>
+                                            <option value="widowed">Widowed</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Address -->
+                        <div>
+                            <h4 class="font-oswald text-lg text-ledger-dark mb-4">Address</h4>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="font-inter font-medium text-ledger-slate block mb-2">Street Address *</label>
+                                    <input type="text" name="street" class="form-input w-full" required>
+                                </div>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="font-inter font-medium text-ledger-slate block mb-2">City *</label>
+                                        <input type="text" name="city" class="form-input w-full" required>
+                                    </div>
+                                    <div>
+                                        <label class="font-inter font-medium text-ledger-slate block mb-2">State *</label>
+                                        <input type="text" name="state" class="form-input w-full" required>
+                                    </div>
+                                </div>
+                                <div class="grid md:grid-cols-3 gap-4">
+                                    <div>
+                                        <label class="font-inter font-medium text-ledger-slate block mb-2">Country *</label>
+                                        <input type="text" name="country" class="form-input w-full" required>
+                                    </div>
+                                    <div>
+                                        <label class="font-inter font-medium text-ledger-slate block mb-2">Postal Code *</label>
+                                        <input type="text" name="postal_code" class="form-input w-full" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Contact Information -->
+                        <div>
+                            <h4 class="font-oswald text-lg text-ledger-dark mb-4">Contact Information</h4>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="font-inter font-medium text-ledger-slate block mb-2">Email *</label>
+                                    <input type="email" name="email" class="form-input w-full" required>
+                                </div>
+                                <div>
+                                    <label class="font-inter font-medium text-ledger-slate block mb-2">Phone *</label>
+                                    <input type="tel" name="phone" class="form-input w-full" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Dependents Section -->
+                        <div>
+                            <h4 class="font-oswald text-lg text-ledger-dark mb-4">Dependents</h4>
+                            <div id="dependents-container" class="space-y-4">
+                                <!-- First dependent row will be added here by JavaScript -->
+                            </div>
+                            <button type="button" id="add-dependent" class="mt-4 font-inter font-medium text-ledger-blue hover:text-ledger-dark transition-colors">
+                                <i class="fas fa-plus mr-2"></i> Add Another Dependent
+                            </button>
+                        </div>
+                        
+                        <button type="submit" class="w-full font-inter font-semibold bg-ledger-steel text-white px-8 py-3 rounded-full hover:bg-opacity-90 transition-all duration-300 transform hover:scale-[1.02] text-lg">
+                            SUBMIT & SCHEDULE CONSULTATION →
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add this after the booking section -->
+<section class="py-24 px-4 md:px-12 bg-light-bg">
+    <div class="max-w-6xl mx-auto">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="mb-8">
+                    <span class="inline-block font-inter font-bold text-ledger-blue bg-white px-4 py-1 rounded-full">PREPARATION</span>
+                </div>
+                <h2 class="font-oswald text-4xl md:text-5xl text-ledger-dark mb-6">
+                    What to Bring:<br>Tax Document Checklist
+                </h2>
+                <p class="font-inter text-lg text-ledger-slate mb-8">
+                    Download our comprehensive checklist to ensure you have all necessary documents for your tax preparation appointment.
+                </p>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <i class="fas fa-file-alt text-ledger-blue text-xl mr-3 mt-1"></i>
+                        <span class="font-inter text-ledger-dark">W-2 forms from all employers</span>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-file-invoice-dollar text-ledger-blue text-xl mr-3 mt-1"></i>
+                        <span class="font-inter text-ledger-dark">1099 forms (contract work, interest, dividends)</span>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-home text-ledger-blue text-xl mr-3 mt-1"></i>
+                        <span class="font-inter text-ledger-dark">Mortgage interest statements (Form 1098)</span>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-hand-holding-heart text-ledger-blue text-xl mr-3 mt-1"></i>
+                        <span class="font-inter text-ledger-dark">Charitable contribution receipts</span>
+                    </div>
+                </div>
+                <a href="/downloads/tax-document-checklist.pdf" 
+                   class="inline-block font-inter font-semibold bg-ledger-blue text-white px-8 py-3 rounded-full hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 text-lg mt-8">
+                    <i class="fas fa-download mr-2"></i> DOWNLOAD CHECKLIST
+                </a>
+            </div>
+            <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=2025&q=80" 
+                     alt="Organized tax documents" 
+                     class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-ledger-dark/10"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- CTA Banner -->
+    <section class="py-16 px-4 md:px-12 bg-gradient-to-r from-ledger-blue to-ledger-steel">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h3 class="font-oswald text-3xl md:text-4xl text-ledger-dark mb-4">
+                        Don't Let Taxes Stress You Out
+                    </h3>
+                    <p class="font-inter text-lg text-ledger-dark/90">
+                        Get expert help today. Maximum refund, minimum stress—guaranteed.
+                    </p>
+                </div>
+                <div class="text-center lg:text-right">
+                    <a href="#booking" class="inline-block font-inter font-semibold bg-white text-ledger-dark px-8 py-3 rounded-full hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105 text-lg">
+                        START FILING NOW →
+                    </a>
+                    <p class="font-inter text-ledger-dark/80 mt-4 text-sm">
+                        Or call us directly: <a href="tel:+15551234567" class="font-semibold hover:text-ledger-dark">+1 (555) 123-4567</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-ledger-dark py-12 px-4 md:px-12 text-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+                <!-- Logo & Brand -->
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="logo-mark w-10 h-10 flex items-center justify-center">
+                            <span class="font-oswald text-lg font-bold text-white relative z-10">LT</span>
+                        </div>
+                        <div class="font-oswald text-xl font-bold text-white">LEDGERTRUST ADVISORY</div>
+                    </div>
+                    <p class="font-inter text-white/80 mb-6 text-sm md:text-base">
+                        Transforming businesses through innovative solutions, expert guidance, and sustainable growth strategies.
+                    </p>
+                    <div class="text-xs md:text-sm font-inter text-white/60">
+                        © 2023 LEDGERTRUST ADVISORY. ALL RIGHTS RESERVED.
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="font-oswald text-lg md:text-xl text-white mb-4 md:mb-6">QUICK LINKS</h3>
+                    <div class="font-inter text-white/80 space-y-2 text-sm md:text-base">
+                        <a href="/" class="block hover:text-ledger-blue transition-colors">HOME</a>
+                        <a href="/about" class="block hover:text-ledger-blue transition-colors">ABOUT US</a>
+                        <a href="/services" class="block hover:text-ledger-blue transition-colors">SERVICES</a>
+                        <a href="/file-my-taxes" class="block text-ledger-blue font-medium">FILE MY TAXES</a>
+                        <a href="/rates" class="block hover:text-ledger-blue transition-colors">RATES</a>
+                        <a href="/contact" class="block hover:text-ledger-blue transition-colors">CONTACT</a>
+                    </div>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h3 class="font-oswald text-lg md:text-xl text-white mb-4 md:mb-6">CONTACT</h3>
+                    <address class="font-inter not-italic text-white/80 space-y-2 text-sm md:text-base">
+                        <p>123 Business Street, Suite 100<br>Boston, MA 02108</p>
+                        <p class="pt-2">+1 (555) 123-4567</p>
+                        <p>info@upscalebos.com</p>
+                    </address>
+                    
+                    <h3 class="font-oswald text-lg md:text-xl text-white mb-4 md:mb-6 mt-6 md:mt-8">SOCIALS</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white/60 hover:text-ledger-blue transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-white/60 hover:text-ledger-blue transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-white/60 hover:text-ledger-blue transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-white/60 hover:text-ledger-blue transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Newsletter -->
+                <div>
+                    <h3 class="font-oswald text-lg md:text-xl text-white mb-4 md:mb-6">STAY UPDATED</h3>
+                    <p class="font-inter text-white/80 mb-4 text-sm md:text-base">
+                        Subscribe to our newsletter for the latest insights on business optimization.
+                    </p>
+                    <form class="space-y-2">
+                        <input type="email" placeholder="Your email" class="w-full px-3 md:px-4 py-2 rounded-full border border-white/20 bg-white/10 text-white placeholder-white/50 font-inter text-xs md:text-sm" aria-label="Email for newsletter">
+                        <button type="submit" class="w-full font-inter font-medium bg-ledger-blue text-white px-3 md:px-4 py-2 rounded-full hover:bg-opacity-90 transition-colors text-xs md:text-sm">
+                            SUBSCRIBE
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/20 mt-12 pt-8 text-center">
+                <p class="font-inter text-white/60 text-sm">
+                    &copy; 2023 LedgerTrust Advisory. All rights reserved. | 
+                    <a href="/privacy" class="hover:text-ledger-blue transition-colors">Privacy Policy</a> | 
+                    <a href="/terms" class="hover:text-ledger-blue transition-colors">Terms of Service</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+            mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (event) => {
+            if (mobileMenu && mobileMenuButton && !mobileMenu.contains(event.target) && !mobileMenuButton.contains(event.target)) {
+                mobileMenu.classList.add('hidden');
+                mobileMenuButton.setAttribute('aria-expanded', 'false');
+            }
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Close mobile menu if open
+                    if (mobileMenu) mobileMenu.classList.add('hidden');
+                    if (mobileMenuButton) mobileMenuButton.setAttribute('aria-expanded', 'false');
+                    
+                    // Smooth scroll
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Navigation scroll logic
+        const nav = document.getElementById('site-nav');
+
+        window.addEventListener('scroll', () => {
+            if (nav) {
+                if (window.scrollY > 50) {
+                    // Scrolled state - white background, dark text
+                    nav.classList.remove('bg-transparent', 'text-white');
+                    nav.classList.add('bg-white/95', 'backdrop-blur-sm', 'text-ledger-dark');
+                    nav.classList.add('nav-scrolled');
+                } else {
+                    // Top state - transparent background, white text
+                    nav.classList.add('bg-transparent', 'text-white');
+                    nav.classList.remove('bg-white/95', 'backdrop-blur-sm', 'text-ledger-dark');
+                    nav.classList.remove('nav-scrolled');
+                }
+            }
+        });
+
+        // Initialize on load
+        if (nav && window.scrollY > 50) {
+            nav.classList.remove('bg-transparent', 'text-white');
+            nav.classList.add('bg-white/95', 'backdrop-blur-sm', 'text-ledger-dark');
+            nav.classList.add('nav-scrolled');
+        }
+        
+        // Dependent form functionality
+        const dependentsContainer = document.getElementById('dependents-container');
+        const addDependentButton = document.getElementById('add-dependent');
+        let dependentCount = 0;
+
+        // Function to add a dependent field group
+        function addDependentField() {
+            dependentCount++;
+            const dependentDiv = document.createElement('div');
+            dependentDiv.className = 'dependent-field bg-light-bg p-4 rounded-lg';
+            dependentDiv.innerHTML = `
+                <div class="flex justify-between items-center mb-3">
+                    <h5 class="font-inter font-medium text-ledger-dark">Dependent ${dependentCount}</h5>
+                    ${dependentCount > 1 ? '<button type="button" class="remove-dependent text-red-500 hover:text-red-700"><i class="fas fa-times"></i></button>' : ''}
+                </div>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="font-inter font-medium text-ledger-slate block mb-2">Full Name *</label>
+                        <input type="text" name="dependent_name_${dependentCount}" class="form-input w-full" required>
+                    </div>
+                    <div>
+                        <label class="font-inter font-medium text-ledger-slate block mb-2">Date of Birth *</label>
+                        <input type="date" name="dependent_dob_${dependentCount}" class="form-input w-full" required>
+                    </div>
+                    <div>
+                        <label class="font-inter font-medium text-ledger-slate block mb-2">Relationship *</label>
+                        <select name="dependent_relationship_${dependentCount}" class="form-input w-full" required>
+                            <option value="">Select</option>
+                            <option value="child">Child</option>
+                            <option value="spouse">Spouse</option>
+                            <option value="parent">Parent</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="font-inter font-medium text-ledger-slate block mb-2">Years Lived With You *</label>
+                        <input type="number" name="dependent_years_${dependentCount}" class="form-input w-full" min="0" max="100" required>
+                    </div>
+                </div>
+            `;
+            
+            dependentsContainer.appendChild(dependentDiv);
+            
+            // Add event listener to remove button
+            const removeButton = dependentDiv.querySelector('.remove-dependent');
+            if (removeButton) {
+                removeButton.addEventListener('click', () => {
+                    dependentDiv.remove();
+                    dependentCount--;
+                    // Update numbers on remaining dependents
+                    updateDependentNumbers();
+                });
+            }
+        }
+
+        // Function to update dependent numbers
+        function updateDependentNumbers() {
+            const dependentFields = dependentsContainer.querySelectorAll('.dependent-field');
+            dependentFields.forEach((field, index) => {
+                const title = field.querySelector('h5');
+                const inputs = field.querySelectorAll('input, select');
+                title.textContent = `Dependent ${index + 1}`;
+                
+                // Update input names
+                inputs.forEach(input => {
+                    const oldName = input.getAttribute('name');
+                    if (oldName) {
+                        const parts = oldName.split('_');
+                        parts[parts.length - 1] = index + 1;
+                        input.setAttribute('name', parts.join('_'));
+                    }
+                });
+            });
+            dependentCount = dependentFields.length;
+        }
+
+        // Add first dependent field on load
+        addDependentField();
+
+        // Add event listener to "Add Another Dependent" button
+        addDependentButton.addEventListener('click', addDependentField);
+
+        // New client form submission
+        const newClientForm = document.getElementById('new-client-form');
+        newClientForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Gather form data
+            const formData = new FormData(newClientForm);
+            const data = Object.fromEntries(formData.entries());
+            
+            // In a real application, you would:
+            // 1. Send data to your backend
+            // 2. Store in your database
+            // 3. Redirect to Calendly with pre-filled information
+            
+            // For now, show success message and redirect to Calendly
+            alert('Thank you for submitting your information! Redirecting to schedule your consultation...');
+            
+            // Redirect to Calendly with pre-filled parameters
+            const calendlyUrl = new URL('https://calendly.com/ledgertrust/new-client');
+            calendlyUrl.searchParams.append('name', data.full_name);
+            calendlyUrl.searchParams.append('email', data.email);
+            calendlyUrl.searchParams.append('a1', `New client: ${data.full_name}`);
+            
+            window.open(calendlyUrl.toString(), '_blank');
+            
+            // Reset form
+            newClientForm.reset();
+            
+            // Reset dependents
+            dependentsContainer.innerHTML = '';
+            dependentCount = 0;
+            addDependentField();
+        });
+        
+        // Prevent horizontal scroll on mobile
+        window.addEventListener('resize', () => {
+            document.body.style.overflowX = 'hidden';
+        });
+        
+        // Initial overflow check
+        document.body.style.overflowX = 'hidden';
+    </script>
+</body>
+</html>
